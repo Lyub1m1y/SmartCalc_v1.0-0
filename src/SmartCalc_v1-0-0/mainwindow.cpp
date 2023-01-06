@@ -2,6 +2,8 @@
 
 #include <QDesktopServices>
 #include <QUrl>
+#include <QMessageBox>
+#include <string>
 
 #include "ui_mainwindow.h"
 
@@ -10,42 +12,55 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
 }
 
+// push text(task) in backend
+void MainWindow::on_Button_res_clicked() {
+  QString temp_text = ui->OutputLabel->text();
+  QByteArray ba = temp_text.toLocal8Bit();
+  char *text = ba.data();
+  double double_result = 0.0;
+  if (entryPoint(text, &double_result) == 0) {
+    ui->OutputLabel->setText(QString::number(double_result));
+  } else {
+      QMessageBox::critical(this, "Invalid expression", "Invalid input");
+  }
+//  ui->OutputLabel->setText(QString::number(double_result));
+}
+
 MainWindow::~MainWindow() { delete ui; }
 
 int checkOperation(QString text) {
-    int status = 0;
-    QCharRef temp = text[text.size() - 1];
-    if (temp == '+') {
+  int status = 0;
+  QCharRef temp = text[text.size() - 1];
+  if (temp == '+') {
+    status = 1;
+  }
+  if (temp == '-') {
+    status = 1;
+  }
+  if (temp == '*') {
+    status = 1;
+  }
+  if (temp == '/') {
+    status = 1;
+  }
+  if (temp == '^') {
+    status = 1;
+  }
+  if (temp == '.') {
+    status = 1;
+  }
+  if (text[text.size() - 1] == 'd') {
+    if (text[text.size() - 2] == 'o') {
+      if (text[text.size() - 3] == 'm') {
         status = 1;
+      }
     }
-    if (temp == '-') {
-        status = 1;
-    }
-    if (temp == '*') {
-        status = 1;
-    }
-    if (temp == '/') {
-        status = 1;
-    }
-    if (temp == '^') {
-        status = 1;
-    }
-    if (text[text.size() - 1] == 'd') {
-        if (text[text.size() - 2] == 'o') {
-            if (text[text.size() - 3] == 'm') {
-                status = 1;
-            }
-        }
-    }
-    return status;
+  }
+  return status;
 }
 
 void MainWindow::on_Help_clicked() {
   QDesktopServices::openUrl(QUrl("../dvi.html", QUrl::TolerantMode));
-}
-// push text(task) in backend
-void MainWindow::on_Button_res_clicked() {
-  ui->OutputLabel->setText(ui->OutputLabel->text() + " ");
 }
 
 void MainWindow::on_Button_d_0_clicked() {
@@ -130,177 +145,142 @@ void MainWindow::on_Button_d_9_clicked() {
   }
 }
 void MainWindow::on_Button_X_clicked() {
-    QString temp = ui->OutputLabel->text();
-    if ((temp[temp.size() - 1] != "x")) {
-        if ((temp == "0") || (temp == "x")) {
-          ui->OutputLabel->setText("x");
-        } else {
-          ui->OutputLabel->setText(ui->OutputLabel->text() + "x");
-        }
-    }
-}
-
-
-void MainWindow::on_Button_OpenBr_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("(");
+  QString temp = ui->OutputLabel->text();
+  if ((temp[temp.size() - 1] != "x")) {
+    if ((temp == "0") || (temp == "x")) {
+      ui->OutputLabel->setText("x");
     } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "(");
+      ui->OutputLabel->setText(ui->OutputLabel->text() + "x");
     }
+  }
 }
 
-
-void MainWindow::on_Button_CloseBr_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText(")");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + ")");
-    }
+void MainWindow::on_Button_OpenBr_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "(");
+  }
 }
 
+void MainWindow::on_Button_CloseBr_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText(")");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + ")");
+  }
+}
 
-void MainWindow::on_Button_dot_clicked()
-{
+void MainWindow::on_Button_dot_clicked() {
+    if (checkOperation((ui->OutputLabel->text())) != 1) {
       ui->OutputLabel->setText(ui->OutputLabel->text() + ".");
-}
-
-
-void MainWindow::on_Button_plus_clicked()
-{
-    if (checkOperation((ui->OutputLabel->text())) != 1) {
-       ui->OutputLabel->setText(ui->OutputLabel->text() + "+");
     }
 }
 
-
-void MainWindow::on_Button_minus_clicked()
-{
-    if (checkOperation((ui->OutputLabel->text())) != 1) {
-       ui->OutputLabel->setText(ui->OutputLabel->text() + "-");
-    }
+void MainWindow::on_Button_plus_clicked() {
+  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "+");
+  }
 }
 
-
-void MainWindow::on_Button_mult_clicked()
-{
-    if (checkOperation((ui->OutputLabel->text())) != 1) {
-       ui->OutputLabel->setText(ui->OutputLabel->text() + "*");
-    }
+void MainWindow::on_Button_minus_clicked() {
+  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "-");
+  }
 }
 
-
-void MainWindow::on_Button_div_clicked()
-{
-    if (checkOperation((ui->OutputLabel->text())) != 1) {
-       ui->OutputLabel->setText(ui->OutputLabel->text() + "/");
-    }
+void MainWindow::on_Button_mult_clicked() {
+  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "*");
+  }
 }
 
-
-void MainWindow::on_Button_sq_clicked()
-{
-    if (checkOperation((ui->OutputLabel->text())) != 1) {
-       ui->OutputLabel->setText(ui->OutputLabel->text() + "^");
-    }
-
+void MainWindow::on_Button_div_clicked() {
+  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "/");
+  }
 }
 
-
-void MainWindow::on_Button_ln_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("ln(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "ln(");
-    }
+void MainWindow::on_Button_sq_clicked() {
+  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "^");
+  }
 }
 
-
-void MainWindow::on_Button_sqrt_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("sqrt(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "sqrt(");
-    }
+void MainWindow::on_Button_ln_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("ln(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "ln(");
+  }
 }
 
-
-void MainWindow::on_Button_sin_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("sin(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "sin(");
-    }
+void MainWindow::on_Button_sqrt_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("sqrt(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "sqrt(");
+  }
 }
 
-
-void MainWindow::on_Button_cos_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("cos(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "cos(");
-    }
+void MainWindow::on_Button_sin_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("sin(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "sin(");
+  }
 }
 
-void MainWindow::on_Button_tan_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("tan(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "tan(");
-    }
+void MainWindow::on_Button_cos_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("cos(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "cos(");
+  }
 }
 
-
-void MainWindow::on_Button_atan_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("atan(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "atan(");
-    }
+void MainWindow::on_Button_tan_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("tan(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "tan(");
+  }
 }
 
-
-void MainWindow::on_Button_acos_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("acos(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "acos(");
-    }
+void MainWindow::on_Button_atan_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("atan(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "atan(");
+  }
 }
 
-
-void MainWindow::on_Button_asin_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("asin(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "asin(");
-    }
+void MainWindow::on_Button_acos_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("acos(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "acos(");
+  }
 }
 
-
-void MainWindow::on_Button_log_clicked()
-{
-    if ((ui->OutputLabel->text()) == "0") {
-      ui->OutputLabel->setText("log(");
-    } else {
-      ui->OutputLabel->setText(ui->OutputLabel->text() + "log(");
-    }
+void MainWindow::on_Button_asin_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("asin(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "asin(");
+  }
 }
 
-
-void MainWindow::on_Button_mod_clicked()
-{
-    if (checkOperation((ui->OutputLabel->text())) != 1) {
-       ui->OutputLabel->setText(ui->OutputLabel->text() + "mod");
-    }
+void MainWindow::on_Button_log_clicked() {
+  if ((ui->OutputLabel->text()) == "0") {
+    ui->OutputLabel->setText("log(");
+  } else {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "log(");
+  }
 }
 
+void MainWindow::on_Button_mod_clicked() {
+  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    ui->OutputLabel->setText(ui->OutputLabel->text() + "mod");
+  }
+}
