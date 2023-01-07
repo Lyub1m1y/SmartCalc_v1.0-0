@@ -1,11 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include <QDesktopServices>
-#include <QUrl>
+#include <QMainWindow>
 #include <QMessageBox>
 #include <QString>
+#include <QUrl>
 #include <string>
 
 #include "ui_mainwindow.h"
@@ -13,6 +13,8 @@
 extern "C" {
 #include "../smartcalc.h"
 }
+
+QString replaceVarX(QString str1, QString str2);
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,6 +29,7 @@ class MainWindow : public QMainWindow {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
  private slots:
+
   void on_Help_clicked();
 
   void on_Button_res_clicked();
