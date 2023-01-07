@@ -1,6 +1,8 @@
 #ifndef SRC_SMARTCALC_H_
 #define SRC_SMARTCALC_H_
 
+#include <ctype.h>
+#include <stdio.h>
 #include <string.h>
 
 #ifndef OK
@@ -13,4 +15,5 @@
 
 int entryPoint(char* text, double* double_result);
 int validator(char* text);
+int isNumber(char* str);
 #endif  // SRC_SMARTCALC_H_

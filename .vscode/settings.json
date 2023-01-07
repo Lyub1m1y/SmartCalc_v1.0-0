@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "smartcalc.h": "c"
+        "smartcalc.h": "c",
+        "cctype": "c"
     }
 }

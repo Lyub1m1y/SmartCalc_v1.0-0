@@ -1,20 +1,40 @@
 #include "mainwindow.h"
 
-#include <QDesktopServices>
-#include <QUrl>
-#include <QMessageBox>
-#include <string>
-
-#include "ui_mainwindow.h"
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 }
 
+QString replaceVarX(QString str1, QString str2) {
+    size_t index = 0;
+    std::string haystack = str1.toStdString();
+    std::string needle = str2.toStdString();
+    int needleLength = needle[needle.size() - 1];
+    while (true) {
+         index = haystack.find("x", index);
+         if (index == std::string::npos) {
+             break;
+         }
+         haystack.replace(index, needleLength, needle);
+         index += needleLength;
+    }
+    str1 = QString::fromStdString(haystack);
+    return str1;
+}
+
 // push text(task) in backend
 void MainWindow::on_Button_res_clicked() {
   QString temp_text = ui->OutputLabel->text();
+  QString needle = ui->line_x->text();
+  QByteArray ba_x = needle.toLocal8Bit();
+  char *haystack_ch = ba_x.data();
+  if (haystack_ch != NULL) {
+      if (isNumber(haystack_ch) == OK) {
+          temp_text = replaceVarX(temp_text, needle);
+      } else {
+          QMessageBox::critical(this, "Invalid expression", "Invalid input for variable X");
+      }
+  }
   QByteArray ba = temp_text.toLocal8Bit();
   char *text = ba.data();
   double double_result = 0.0;
@@ -172,7 +192,9 @@ void MainWindow::on_Button_CloseBr_clicked() {
 }
 
 void MainWindow::on_Button_dot_clicked() {
-    if (checkOperation((ui->OutputLabel->text())) != 1) {
+    QString temp_text = ui->OutputLabel->text();
+    QCharRef last = temp_text[temp_text.size() - 1];
+    if ((checkOperation(temp_text) != 1) && (last != '(') && (last != ')')) {
       ui->OutputLabel->setText(ui->OutputLabel->text() + ".");
     }
 }

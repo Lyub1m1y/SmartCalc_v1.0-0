@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QMessageBox>
+#include <QString>
+#include <string>
+
+#include "ui_mainwindow.h"
 
 extern "C" {
 #include "../smartcalc.h"
