@@ -16,4 +16,5 @@
 int entryPoint(char* text, double* double_result);
 int validator(char* text);
 int isNumber(char* str);
+int checkCorrectOperator(char* text, int *i);
 #endif  // SRC_SMARTCALC_H_

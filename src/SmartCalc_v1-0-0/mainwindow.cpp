@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
 }
 // push text(task) in backend
 void MainWindow::on_Button_res_clicked() {
+  // dubug
+  //  QString temp_text = "5+(atan(8))";
   QString temp_text = ui->OutputLabel->text();
   QString needle = ui->line_x->text();
   QByteArray ba_x = needle.toLocal8Bit();
@@ -21,7 +23,7 @@ void MainWindow::on_Button_res_clicked() {
   QByteArray ba = temp_text.toLocal8Bit();
   char *text = ba.data();
   double double_result = 0.0;
-  if (entryPoint(text, &double_result) == 0) {
+  if (entryPoint(text, &double_result) == OK) {
 //    ui->OutputLabel->setText(QString::number(double_result));
       ui->OutputLabel->setText(temp_text);
   } else {
@@ -159,17 +161,21 @@ void MainWindow::on_Button_X_clicked() {
 }
 
 void MainWindow::on_Button_OpenBr_clicked() {
+  QString temp_text = ui->OutputLabel->text();
+  QCharRef last = temp_text[temp_text.size() - 1];
   if ((ui->OutputLabel->text()) == "0") {
     ui->OutputLabel->setText("(");
-  } else {
+  } else if (last != ')') {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "(");
   }
 }
 
 void MainWindow::on_Button_CloseBr_clicked() {
+  QString temp_text = ui->OutputLabel->text();
+  QCharRef last = temp_text[temp_text.size() - 1];
   if ((ui->OutputLabel->text()) == "0") {
     ui->OutputLabel->setText(")");
-  } else {
+  } else if (last != '(') {
     ui->OutputLabel->setText(ui->OutputLabel->text() + ")");
   }
 }
@@ -183,7 +189,9 @@ void MainWindow::on_Button_dot_clicked() {
 }
 
 void MainWindow::on_Button_plus_clicked() {
-  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    QString temp_text = ui->OutputLabel->text();
+    QCharRef last = temp_text[temp_text.size() - 1];
+  if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "+");
   }
 }
@@ -195,19 +203,25 @@ void MainWindow::on_Button_minus_clicked() {
 }
 
 void MainWindow::on_Button_mult_clicked() {
-  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    QString temp_text = ui->OutputLabel->text();
+    QCharRef last = temp_text[temp_text.size() - 1];
+  if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "*");
   }
 }
 
 void MainWindow::on_Button_div_clicked() {
-  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    QString temp_text = ui->OutputLabel->text();
+    QCharRef last = temp_text[temp_text.size() - 1];
+  if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "/");
   }
 }
 
 void MainWindow::on_Button_sq_clicked() {
-  if (checkOperation((ui->OutputLabel->text())) != 1) {
+    QString temp_text = ui->OutputLabel->text();
+    QCharRef last = temp_text[temp_text.size() - 1];
+  if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "^");
   }
 }
