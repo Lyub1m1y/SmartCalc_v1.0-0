@@ -130,6 +130,8 @@ int checkCorrectOperator(char* text, int* i) {
 int isSign(char* text, int* i, int* dotCount) {
   int status = FAIL;
   char symb = text[(*i)];
+  char prev = text[(*i) - 1];
+  char next = text[(*i) + 1];
   if (symb == '+') {
     if (checkCorrectOperator(text, i) == 0) {
       status = OK;
@@ -167,9 +169,35 @@ int isSign(char* text, int* i, int* dotCount) {
     }
   }
   if (symb == '(') {
-    status = OK;
+    if (((isOper(prev) == OK) || prev == NULL) &&
+        ((isOper(next) != OK) || next != NULL)) {
+      status = OK;
+    }
   }
   if (symb == ')') {
+    if (((isOper(prev) != OK) || prev != NULL) &&
+        ((isOper(next) == OK) || next == NULL)) {
+      status = OK;
+    }
+  }
+  return status;
+}
+
+int isOper(char symb) {
+  int status = FAIL;
+  if (symb == '+') {
+    status = OK;
+  }
+  if (symb == '-') {
+    status = OK;
+  }
+  if (symb == '*') {
+    status = OK;
+  }
+  if (symb == '/') {
+    status = OK;
+  }
+  if (symb == '^') {
     status = OK;
   }
   return status;
@@ -191,4 +219,50 @@ int checkRatioBrackets(char* text, int text_length) {
     status = OK;
   }
   return status;
+}
+
+stack_t stack_init_() {
+  stack_t stack = {
+      .value = 0.0,
+      .priority = 0,
+      .type = 0,
+      .next = NULL,
+  };
+  return stack;
+}
+
+void stack_push_(double value, int priority, type_t type, stack_t** stack) {
+  stack_t* new = malloc(sizeof(stack_t));
+  if (new != NULL) {
+    new->value = value;
+    new->priority = priority;
+    new->type = type;
+    new->next = *stack;
+    *stack = new;
+  }
+}
+
+void stack_pop_(stack_t** last) {
+  if (*last != NULL) {
+    stack_t* tmp = (*last)->next;
+    free(*last);
+    *last = tmp;
+  }
+}
+
+void stack_reverse_(stack_t** stack, stack_t** reverse_stack) {
+  while (*stack) {
+    stack_push_((*stack)->value, (*stack)->priority, (*stack)->type,
+                reverse_stack);
+    stack_pop_(stack);
+  }
+}
+
+stack_t* stack_free_(stack_t* list) {
+  while (list != NULL) {
+    stack_t* temporary = list;
+    list = list->next;
+    free(temporary);
+  }
+  return NULL;
 }
