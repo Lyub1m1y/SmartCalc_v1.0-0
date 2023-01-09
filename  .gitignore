@@ -43,7 +43,8 @@
 *.pdb
 *.vscode/
 **/.DS_Store
-src/build-SmartCalc_v1-0-0-Desktop-Release
+src/build-SmartCalc_v1-0-0-Desktop-Release/
+src/smartcalc
 
 # Kernel Module Compile Results
 *.mod*

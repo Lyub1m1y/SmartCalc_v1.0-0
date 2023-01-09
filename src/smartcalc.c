@@ -4,11 +4,64 @@
 // int main() {
 //   int status = OK;
 //   double double_result = 0.0;
-//   char text[] = "5+(atan(8))";
+//   char text[] = "((5))";
 //   status = entryPoint(text, &double_result);
 //   // printf("|status = %d|", status);
 //   return status;
 // }
+
+int entryPoint(char* text, double* double_result) {
+  int status = OK;
+  if (validator(text) == OK) {
+  } else {
+    status = FAIL;
+  }
+  // *double_result = 99999.9;
+  return status;
+}
+
+int validator(char* text) {
+  int status = OK;
+  int text_length = strlen(text);
+  if (checkRatioBrackets(text, text_length) == OK) {
+    int dotCount = 0;
+    for (int i = 0; i < text_length && status != FAIL; i++) {
+      if (isdigit(text[i]) == 0) {
+        if (isSign(text, &i, &dotCount) == FAIL) {
+          if (funcsParentheses(text, &i, 0) == FAIL) {
+            status = FAIL;
+          }
+        }
+      }
+      if (dotCount == 2) {
+        status = FAIL;
+      }
+    }
+  } else {
+    status = FAIL;
+  }
+  return status;
+}
+
+// Эта функция для проверки input(var x) число это или чтобы заменить x начисло
+int isNumber(char* str) {
+  int status = OK;
+  int strLength = strlen(str);
+  int dotCount = 0;
+  for (int i = 0; i < strLength && status != FAIL; i++) {
+    if (isdigit(str[i]) == 0) {
+      if (str[i] != '.') {
+        status = FAIL;
+      } else {
+        dotCount++;
+        if (dotCount > 1) {
+          status = FAIL;
+        }
+      }
+    }
+  }
+  return status;
+}
 
 int funcsParentheses(char* text, int* i, int sum) {
   int status = FAIL;
@@ -122,51 +175,20 @@ int isSign(char* text, int* i, int* dotCount) {
   return status;
 }
 
-int entryPoint(char* text, double* double_result) {
-  int status = OK;
-  if (validator(text) == OK) {
-  } else {
-    status = FAIL;
-  }
-  // *double_result = 99999.9;
-  return status;
-}
-
-int validator(char* text) {
-  int status = OK;
-  int text_length = strlen(text);
-  int dotCount = 0;
-  for (int i = 0; i < text_length && status != FAIL; i++) {
-    if (isdigit(text[i]) == 0) {
-      if (isSign(text, &i, &dotCount) == FAIL) {
-        if (funcsParentheses(text, &i, 0) == FAIL) {
-          status = FAIL;
-        }
-      }
+int checkRatioBrackets(char* text, int text_length) {
+  int status = FAIL;
+  int countL = 0;  // '('
+  int countR = 0;  // ')'
+  for (int i = 0; i < text_length; i++) {
+    if (text[i] == '(') {
+      countL++;
     }
-    if (dotCount == 2) {
-      status = FAIL;
+    if (text[i] == ')') {
+      countR++;
     }
   }
-  return status;
-}
-
-// Эта функция для проверки input(var x) число это или чтобы заменить x начисло
-int isNumber(char* str) {
-  int status = OK;
-  int strLength = strlen(str);
-  int dotCount = 0;
-  for (int i = 0; i < strLength && status != FAIL; i++) {
-    if (isdigit(str[i]) == 0) {
-      if (str[i] != '.') {
-        status = FAIL;
-      } else {
-        dotCount++;
-        if (dotCount > 1) {
-          status = FAIL;
-        }
-      }
-    }
+  if (countL == countR) {
+    status = OK;
   }
   return status;
 }
