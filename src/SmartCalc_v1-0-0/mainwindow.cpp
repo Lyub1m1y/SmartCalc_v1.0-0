@@ -13,7 +13,8 @@ void MainWindow::on_Button_res_clicked() {
   QByteArray ba_x = needle.toLocal8Bit();
   char *haystack_ch = ba_x.data();
   if (haystack_ch != NULL) {
-    if (isNumber(haystack_ch) == OK) {
+    int mod = 0;
+    if (isNumber(haystack_ch, &mod) == OK) {
       temp_text = replaceVarX(temp_text, needle);
     } else {
       QMessageBox::critical(this, "Invalid expression",
@@ -24,8 +25,8 @@ void MainWindow::on_Button_res_clicked() {
   char *text = ba.data();
   double double_result = 0.0;
   if (entryPoint(text, &double_result) == OK) {
-//    ui->OutputLabel->setText(QString::number(double_result));
-      ui->OutputLabel->setText(temp_text);
+    //    ui->OutputLabel->setText(QString::number(double_result));
+    ui->OutputLabel->setText(temp_text);
   } else {
     QMessageBox::critical(this, "Invalid expression", "Invalid input");
   }
@@ -189,8 +190,8 @@ void MainWindow::on_Button_dot_clicked() {
 }
 
 void MainWindow::on_Button_plus_clicked() {
-    QString temp_text = ui->OutputLabel->text();
-    QCharRef last = temp_text[temp_text.size() - 1];
+  QString temp_text = ui->OutputLabel->text();
+  QCharRef last = temp_text[temp_text.size() - 1];
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "+");
   }
@@ -203,24 +204,24 @@ void MainWindow::on_Button_minus_clicked() {
 }
 
 void MainWindow::on_Button_mult_clicked() {
-    QString temp_text = ui->OutputLabel->text();
-    QCharRef last = temp_text[temp_text.size() - 1];
+  QString temp_text = ui->OutputLabel->text();
+  QCharRef last = temp_text[temp_text.size() - 1];
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "*");
   }
 }
 
 void MainWindow::on_Button_div_clicked() {
-    QString temp_text = ui->OutputLabel->text();
-    QCharRef last = temp_text[temp_text.size() - 1];
+  QString temp_text = ui->OutputLabel->text();
+  QCharRef last = temp_text[temp_text.size() - 1];
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "/");
   }
 }
 
 void MainWindow::on_Button_sq_clicked() {
-    QString temp_text = ui->OutputLabel->text();
-    QCharRef last = temp_text[temp_text.size() - 1];
+  QString temp_text = ui->OutputLabel->text();
+  QCharRef last = temp_text[temp_text.size() - 1];
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "^");
   }
@@ -308,14 +309,14 @@ QString replaceVarX(QString str1, QString str2) {
   std::string haystack = str1.toStdString();
   std::string needle = str2.toStdString();
   std::string search = "x";
-    for( size_t pos = 0; ; pos += needle.length() ) {
-        // Locate the substring to replace
-        pos = haystack.find( search, pos );
-        if( pos == std::string::npos ) break;
-        // Replace by erasing and inserting
-        haystack.erase( pos, search.length() );
-        haystack.insert( pos, needle );
-    }
-    str1 = QString::fromStdString(haystack);
-    return str1;
+  for (size_t pos = 0;; pos += needle.length()) {
+    // Locate the substring to replace
+    pos = haystack.find(search, pos);
+    if (pos == std::string::npos) break;
+    // Replace by erasing and inserting
+    haystack.erase(pos, search.length());
+    haystack.insert(pos, needle);
   }
+  str1 = QString::fromStdString(haystack);
+  return str1;
+}

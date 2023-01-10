@@ -44,12 +44,12 @@ int validator(char* text) {
 }
 
 // Эта функция для проверки input(var x) число это или чтобы заменить x начисло
-int isNumber(char* str) {
+int isNumber(char* str, int* mod) {
   int status = OK;
-  int strLength = strlen(str);
   int dotCount = 0;
-  for (int i = 0; i < strLength && status != FAIL; i++) {
-    if (isdigit(str[i]) == 0) {
+  int i = (*mod);
+  while (((isdigit(str[i]) == OK) || (str[i] == '.')) && (status != FAIL)) {
+    if (isdigit(str[i]) == OK) {
       if (str[i] != '.') {
         status = FAIL;
       } else {
@@ -59,9 +59,32 @@ int isNumber(char* str) {
         }
       }
     }
+    i++;
+  }
+  if ((*mod) != 0) {
+    (*mod) = i;
   }
   return status;
 }
+
+// int isNumber(char* str) {
+//   int status = OK;
+//   int strLength = strlen(str);
+//   int dotCount = 0;
+//   for (int i = 0; i < strLength && status != FAIL; i++) {
+//     if (isdigit(str[i]) == 0) {
+//       if (str[i] != '.') {
+//         status = FAIL;
+//       } else {
+//         dotCount++;
+//         if (dotCount > 1) {
+//           status = FAIL;
+//         }
+//       }
+//     }
+//   }
+//   return status;
+// }
 
 int funcsParentheses(char* text, int* i, int sum) {
   int status = FAIL;

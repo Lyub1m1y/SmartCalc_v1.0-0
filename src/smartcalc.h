@@ -55,7 +55,7 @@ typedef struct stack_t {
 
 int entryPoint(char* text, double* double_result);
 int validator(char* text);
-int isNumber(char* str);
+int isNumber(char* str, int* mod);
 int checkCorrectOperator(char* text, int* i);
 int funcsParentheses(char* text, int* i, int sum);
 int checkCorrectOperator(char* text, int* i);
