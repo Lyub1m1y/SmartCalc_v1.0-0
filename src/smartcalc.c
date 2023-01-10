@@ -1,18 +1,36 @@
 #include "smartcalc.h"
 
 // debug
-// int main() {
-//   int status = OK;
-//   double double_result = 0.0;
-//   char text[] = "((5))";
-//   status = entryPoint(text, &double_result);
-//   // printf("|status = %d|", status);
-//   return status;
-// }
+int main() {
+  int status = OK;
+  double double_result = 0.0;
+  char text[] = "5+5";
+  status = entryPoint(text, &double_result);
+  printf("|status = %d|\n", status);
+}
+
+void parser(char* text, stack_t** reverseTokens) {
+  int text_length = strlen(text);
+  for (int i = 0; i < text_length; i++) {
+    char number[256] = {0};
+    double value = 0.0;
+    if (isNumber(text, &i) == OK) {
+      for (int j = 0; j <= i; j++) {
+        number[j] = text[j];
+      }
+      sscanf(number, "%lf", &value);
+      stack_push_(value, 0, NUMBER, reverseTokens);
+    }
+    // TODO нужно допилить парсер
+  }
+}
 
 int entryPoint(char* text, double* double_result) {
   int status = OK;
   if (validator(text) == OK) {
+    stack_t* reverseTokens = NULL;
+    parser(text, &reverseTokens);
+    stack_print_(reverseTokens);
   } else {
     status = FAIL;
   }
@@ -61,30 +79,9 @@ int isNumber(char* str, int* mod) {
     }
     i++;
   }
-  if ((*mod) != 0) {
-    (*mod) = i;
-  }
+  (*mod) = i;
   return status;
 }
-
-// int isNumber(char* str) {
-//   int status = OK;
-//   int strLength = strlen(str);
-//   int dotCount = 0;
-//   for (int i = 0; i < strLength && status != FAIL; i++) {
-//     if (isdigit(str[i]) == 0) {
-//       if (str[i] != '.') {
-//         status = FAIL;
-//       } else {
-//         dotCount++;
-//         if (dotCount > 1) {
-//           status = FAIL;
-//         }
-//       }
-//     }
-//   }
-//   return status;
-// }
 
 int funcsParentheses(char* text, int* i, int sum) {
   int status = FAIL;
@@ -244,16 +241,6 @@ int checkRatioBrackets(char* text, int text_length) {
   return status;
 }
 
-stack_t stack_init_() {
-  stack_t stack = {
-      .value = 0.0,
-      .priority = 0,
-      .type = 0,
-      .next = NULL,
-  };
-  return stack;
-}
-
 void stack_push_(double value, int priority, type_t type, stack_t** stack) {
   stack_t* new = malloc(sizeof(stack_t));
   if (new != NULL) {
@@ -280,6 +267,20 @@ void stack_reverse_(stack_t** stack, stack_t** reverse_stack) {
     stack_pop_(stack);
   }
 }
+// TODO del func stack_print__
+void stack_print_(stack_t* stack) {
+  char delimeter[] = "";
+  stack_t* tmp = stack;
+  while (tmp != NULL) {
+    printf("[");
+    printf("\"%f\",", tmp->value);
+    printf("\"%d\",", tmp->priority);
+    printf("\"%d\",", tmp->type);
+    if (tmp == NULL) break;
+    tmp = tmp->next;
+    printf("]\n");
+  }
+}
 
 stack_t* stack_free_(stack_t* list) {
   while (list != NULL) {
@@ -289,3 +290,14 @@ stack_t* stack_free_(stack_t* list) {
   }
   return NULL;
 }
+
+// int isX(char* str) {
+//   int status = FAIL;
+//   int str_length = strlen(str);
+//   for (int i = 0; i < str_length; i++) {
+//     if (str[i] == 'x') {
+//       status = OK;
+//     }
+//   }
+//   return status;
+// }

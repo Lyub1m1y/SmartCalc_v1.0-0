@@ -4,6 +4,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 }
+
 // push text(task) in backend
 void MainWindow::on_Button_res_clicked() {
   // dubug
@@ -12,7 +13,7 @@ void MainWindow::on_Button_res_clicked() {
   QString needle = ui->line_x->text();
   QByteArray ba_x = needle.toLocal8Bit();
   char *haystack_ch = ba_x.data();
-  if (haystack_ch != NULL) {
+  if ((*haystack_ch) != '\0') {
     int mod = 0;
     if (isNumber(haystack_ch, &mod) == OK) {
       temp_text = replaceVarX(temp_text, needle);
@@ -310,10 +311,8 @@ QString replaceVarX(QString str1, QString str2) {
   std::string needle = str2.toStdString();
   std::string search = "x";
   for (size_t pos = 0;; pos += needle.length()) {
-    // Locate the substring to replace
     pos = haystack.find(search, pos);
     if (pos == std::string::npos) break;
-    // Replace by erasing and inserting
     haystack.erase(pos, search.length());
     haystack.insert(pos, needle);
   }
