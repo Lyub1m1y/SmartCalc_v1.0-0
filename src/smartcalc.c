@@ -1,36 +1,23 @@
 #include "smartcalc.h"
 
 // debug
-int main() {
-  int status = OK;
-  double double_result = 0.0;
-  char text[] = "5+5";
-  status = entryPoint(text, &double_result);
-  printf("|status = %d|\n", status);
-}
-
-void parser(char* text, stack_t** reverseTokens) {
-  int text_length = strlen(text);
-  for (int i = 0; i < text_length; i++) {
-    char number[256] = {0};
-    double value = 0.0;
-    if (isNumber(text, &i) == OK) {
-      for (int j = 0; j <= i; j++) {
-        number[j] = text[j];
-      }
-      sscanf(number, "%lf", &value);
-      stack_push_(value, 0, NUMBER, reverseTokens);
-    }
-    // TODO нужно допилить парсер
-  }
-}
+// int main() {
+//   int status = OK;
+//   double double_result = 0.0;
+//   char text[] = "(5+(cos(7)+atan(20.505056)^30))";
+//   status = entryPoint(text, &double_result);
+//   printf("|status = %d|\n", status);
+//   return status;
+// }
 
 int entryPoint(char* text, double* double_result) {
   int status = OK;
   if (validator(text) == OK) {
     stack_t* reverseTokens = NULL;
     parser(text, &reverseTokens);
-    stack_print_(reverseTokens);
+    stack_t* tokens = NULL;
+    stack_reverse_(&tokens, &reverseTokens);
+    stack_print_(tokens);
   } else {
     status = FAIL;
   }
@@ -61,7 +48,86 @@ int validator(char* text) {
   return status;
 }
 
-// Эта функция для проверки input(var x) число это или чтобы заменить x начисло
+void parser(char* text, stack_t** reverseTokens) {
+  int text_length = strlen(text);
+  for (int i = 0; i < text_length; i++) {
+    if (isdigit(text[i]) != 0) {
+      char number[255] = {0};
+      double value = 0.0;
+      int j = 0;
+      while ((isdigit(text[i]) != 0) || (isDot(&text[i]) == OK)) {
+        number[j] = text[i];
+        j++;
+        i++;
+      }
+      i--;
+      sscanf(number, "%lf", &value);
+      stack_push_(value, 0, NUMBER, reverseTokens);
+    } else if (text[i] == '(') {
+      stack_push_(0, 0, OPENBRACKET, reverseTokens);
+    } else if (text[i] == ')') {
+      stack_push_(0, 0, CLOSEBRACKET, reverseTokens);
+    } else if (text[i] == '*') {
+      stack_push_(0, 2, MUL, reverseTokens);
+    } else if (text[i] == '/') {
+      stack_push_(0, 2, DIV, reverseTokens);
+    } else if (text[i] == 'm') {
+      stack_push_(0, 2, MOD, reverseTokens);
+      i += 2;
+    } else if (text[i] == '^') {
+      stack_push_(0, 3, POW, reverseTokens);
+    } else if (text[i] == 's') {
+      if (text[i + 1] == 'i') {
+        stack_push_(0, 4, SIN, reverseTokens);
+        i += 2;
+      } else if (text[i + 1] == 'q') {
+        stack_push_(0, 4, SQRT, reverseTokens);
+        i += 3;
+      }
+    } else if (text[i] == 'l') {
+      if (text[i + 1] == 'n') {
+        stack_push_(0, 4, LN, reverseTokens);
+        i += 1;
+      } else if (text[i + 1] == 'o') {
+        stack_push_(0, 4, LOG, reverseTokens);
+        i += 2;
+      }
+    } else if (text[i] == 'c') {
+      stack_push_(0, 4, COS, reverseTokens);
+      i += 2;
+    } else if (text[i] == 't') {
+      stack_push_(0, 4, TAN, reverseTokens);
+      i += 2;
+    } else if (text[i] == 'a') {
+      if (text[i + 1] == 's') {
+        stack_push_(0, 4, ASIN, reverseTokens);
+        i += 3;
+      } else if (text[i + 1] == 'c') {
+        stack_push_(0, 4, ACOS, reverseTokens);
+        i += 3;
+      } else if (text[i + 1] == 't') {
+        stack_push_(0, 4, ATAN, reverseTokens);
+        i += 3;
+      }
+    } else if (text[i] == '+') {
+      if ((i == 0) || (text[i - 1] == '(')) {
+        stack_push_(0, 1, UNPLUS, reverseTokens);
+      } else {
+        stack_push_(0, 1, PLUS, reverseTokens);
+      }
+    } else if (text[i] == '-') {
+      if ((i == 0) || (text[i - 1] == '(')) {
+        stack_push_(0, 1, UNMINUS, reverseTokens);
+      } else {
+        stack_push_(0, 1, MINUS, reverseTokens);
+      }
+    }
+    // TODO нужно допилить парсер
+  }
+}
+
+// Эта функция для проверки reverseTokens(var x) число это или чтобы заменить x
+// начисло
 int isNumber(char* str, int* mod) {
   int status = OK;
   int dotCount = 0;
@@ -82,6 +148,85 @@ int isNumber(char* str, int* mod) {
   (*mod) = i;
   return status;
 }
+// int checkSin(char* sin, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&sin[(*mod)]), "sin(", 4)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkCos(char* cos, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&cos[(*mod)]), "cos(", 4)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkTan(char* tan, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&tan[(*mod)]), "tan(", 4)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkAcos(char* acos, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&acos[(*mod)]), "acos(", 5)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkAtan(char* atan, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&atan[(*mod)]), "atan(", 5)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkAsin(char* asin, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&asin[(*mod)]), "asin(", 5)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkSqrt(char* sqrt, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&sqrt[(*mod)]), "sqrt(", 5)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkLn(char* ln, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&ln[(*mod)]), "ln(", 3)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+// int checkLog(char* log, int* mod) {
+//   int status = FAIL;
+//   if (strncmp((&log[(*mod)]), "log(", 4)) {
+//     status = OK;
+//   }
+//   return status;
+// }
+
+int isDot(char* dot) {
+  int status = FAIL;
+  if (*dot == '.') {
+    status = OK;
+  }
+  return status;
+}
 
 int funcsParentheses(char* text, int* i, int sum) {
   int status = FAIL;
@@ -93,43 +238,43 @@ int funcsParentheses(char* text, int* i, int sum) {
   if (symb == 'l') {
     if (next == 'n') {
       status = OK;
-      (*i) += 1;
+      (*i) += 3;
     }
     if (next == 'o') {
       status = OK;
-      (*i) += 2;
+      (*i) += 4;
     }
   }
   if (symb == 's') {
     if (next == 'q') {
       status = OK;
-      (*i) += 3;
+      (*i) += 5;
     }
     if (next == 'i') {
       status = OK;
-      (*i) += 2;
+      (*i) += 4;
     }
   }
   if (symb == 'c') {
     status = OK;
-    (*i) += 2;
+    (*i) += 4;
   }
   if (symb == 't') {
     status = OK;
-    (*i) += 2;
+    (*i) += 4;
   }
   if (symb == 'a') {
     if (next == 's') {
       status = OK;
-      (*i) += 3;
+      (*i) += 5;
     }
     if (next == 'c') {
       status = OK;
-      (*i) += 3;
+      (*i) += 5;
     }
     if (next == 't') {
       status = OK;
-      (*i) += 3;
+      (*i) += 5;
     }
   }
   return status;
@@ -188,17 +333,13 @@ int isSign(char* text, int* i, int* dotCount) {
       (*dotCount) += 1;
     }
   }
+
   if (symb == '(') {
-    if (((isOper(prev) == OK) || prev == NULL) &&
-        ((isOper(next) != OK) || next != NULL)) {
-      status = OK;
-    }
+    status = OK;
   }
+
   if (symb == ')') {
-    if (((isOper(prev) != OK) || prev != NULL) &&
-        ((isOper(next) == OK) || next == NULL)) {
-      status = OK;
-    }
+    status = OK;
   }
   return status;
 }
@@ -261,10 +402,10 @@ void stack_pop_(stack_t** last) {
 }
 
 void stack_reverse_(stack_t** stack, stack_t** reverse_stack) {
-  while (*stack) {
-    stack_push_((*stack)->value, (*stack)->priority, (*stack)->type,
-                reverse_stack);
-    stack_pop_(stack);
+  while (*reverse_stack) {
+    stack_push_((*reverse_stack)->value, (*reverse_stack)->priority,
+                (*reverse_stack)->type, stack);
+    stack_pop_(reverse_stack);
   }
 }
 // TODO del func stack_print__

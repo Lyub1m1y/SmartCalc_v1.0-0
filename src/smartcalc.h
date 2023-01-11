@@ -18,12 +18,14 @@
 typedef enum type_t {
   NUMBER = 1,
   PLUS,
+  UNPLUS,
   MINUS,
+  UNMINUS,
   MUL,
   DIV,
   POW,
-  BRACKETL,
-  BRACKETR,
+  OPENBRACKET,
+  CLOSEBRACKET,
   LN,
   SQRT,
   SIN,
@@ -37,12 +39,11 @@ typedef enum type_t {
 } type_t;
 
 /* priority
- 0 - |'0-9'|, |'.'|;
+ 0 - |'0-9'|, |'.'|,'('|, |')'|;
  1 - |'+'|, |'-'|;
  1 - |'*'|, |'/'|, |"mod"|;
  3 - |'^'|;
  4 - |'sin'|, |'cos'|, ...;
- 5 - |'('|, |')'|;
  */
 
 // stack preEntity
@@ -57,6 +58,7 @@ int entryPoint(char* text, double* double_result);
 int validator(char* text);
 // int isX(char* str);
 int isNumber(char* str, int* mod);
+int isDot(char* dot);
 int checkCorrectOperator(char* text, int* i);
 int funcsParentheses(char* text, int* i, int sum);
 int checkCorrectOperator(char* text, int* i);
