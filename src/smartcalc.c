@@ -1,14 +1,14 @@
 #include "smartcalc.h"
 
 // debug
-// int main() {
-//   int status = OK;
-//   double double_result = 0.0;
-//   char text[] = "(5+(cos(7)+atan(20.505056)^30))";
-//   status = entryPoint(text, &double_result);
-//   printf("|status = %d|\n", status);
-//   return status;
-// }
+int main() {
+  int status = OK;
+  double double_result = 0.0;
+  char text[] = "5mod6+cos(7)+atan(20.505056)^30+7mod8";
+  status = entryPoint(text, &double_result);
+  printf("|status = %d|\n", status);
+  return status;
+}
 
 int entryPoint(char* text, double* double_result) {
   int status = OK;
@@ -258,6 +258,10 @@ int funcsParentheses(char* text, int* i, int sum) {
   if (symb == 'c') {
     status = OK;
     (*i) += 4;
+  }
+  if (symb == 'm') {
+    status = OK;
+    (*i) += 3;
   }
   if (symb == 't') {
     status = OK;
