@@ -26,8 +26,9 @@ void MainWindow::on_Button_res_clicked() {
   char *text = ba.data();
   double double_result = 0.0;
   if (entryPoint(text, &double_result) == OK) {
-    //    ui->OutputLabel->setText(QString::number(double_result));
-    ui->OutputLabel->setText(temp_text);
+        ui->OutputLabel->setText(QString::number(double_result, 'f', 7));// Выдает 4.000000
+//    ui->OutputLabel->setText(temp_text);
+//      ui->OutputLabel->setText(QString::number(double_result, 'g', 15)); // Выдает 4
   } else {
     QMessageBox::critical(this, "Invalid expression", "Invalid input");
   }

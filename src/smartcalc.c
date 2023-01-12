@@ -4,7 +4,7 @@
 // int main() {
 //   int status = OK;
 //   double double_result = 0.0;
-//   char text[] = "5mod6+cos(7)+atan(20.505056)^30+7mod8";
+//   char text[] = "2+2";
 //   status = entryPoint(text, &double_result);
 //   printf("|status = %d|\n", status);
 //   return status;
@@ -23,7 +23,10 @@ int entryPoint(char* text, double* double_result) {
     stack_t* output = NULL;
     stack_reverse_(&output, &reverseOutput);
 
-    stack_print_(output);  // TODO debug delete
+    calculate(&output);
+    // sprintf(text, "%lf", output->value);
+    *double_result = output->value;
+    // stack_print_(output);  // TODO debug delete
   } else {
     status = FAIL;
   }
@@ -166,6 +169,138 @@ void reversePolishNotation(stack_t* stack, stack_t** numStack) {
     stack_push_(supportStack->value, supportStack->priority, supportStack->type,
                 numStack);
     stack_pop_(&supportStack);
+  }
+}
+
+void calculate(stack_t** stack) {
+  while ((*stack)->next != NULL) {
+    stack_t *tmp_1 = {0}, *tmp_2 = {0}, *tmp_3 = {0};
+    tmp_1 = *stack;
+    tmp_2 = tmp_1->next;
+    if (tmp_2->next != NULL) {
+      tmp_3 = tmp_2->next;
+    }
+    if (tmp_2->type == NUMBER) {
+      while (!tmp_3->priority) {
+        tmp_1 = tmp_2;
+        tmp_2 = tmp_1->next;
+        tmp_3 = tmp_2->next;
+      }
+      if (stack_peekType_(tmp_3) > 1 && stack_peekType_(tmp_3) < 8) {
+        calcLexems(stack, tmp_1, tmp_2, tmp_3);
+      } else {
+        calcFuncs(stack, tmp_2, tmp_3);
+      }
+    } else {
+      calcFuncs_2(stack, tmp_1, tmp_2);
+    }
+  }
+}
+
+void calcLexems(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2,
+                stack_t* tmp_3) {
+  double numStack = 0;
+  double a = tmp_1->value;
+  double b = tmp_2->value;
+  if (stack_peekType_(tmp_3) == PLUS) {
+    numStack = a + b;
+  } else if (stack_peekType_(tmp_3) == MINUS) {
+    numStack = a - b;
+  } else if (stack_peekType_(tmp_3) == MUL) {
+    numStack = a * b;
+  } else if (stack_peekType_(tmp_3) == DIV) {
+    numStack = a / b;
+  } else if (stack_peekType_(tmp_3) == POW) {
+    numStack = pow(a, b);
+  } else if (stack_peekType_(tmp_3) == MOD) {
+    numStack = fmod(a, b);
+  }
+  tmp_1->priority = 0;
+  tmp_1->type = NUMBER;
+  tmp_1->value = numStack;
+  delStack(stack, tmp_3);
+  delStack(stack, tmp_2);
+}
+
+void calcFuncs(stack_t** stack, stack_t* tmp_2, stack_t* tmp_3) {
+  double a = 0;
+  double numStack = 0;
+  a = tmp_2->value;
+  if (stack_peekType_(tmp_3) == UNPLUS) {
+    numStack = +a;
+  } else if (stack_peekType_(tmp_3) == UNMINUS) {
+    numStack = -a;
+  } else if (stack_peekType_(tmp_3) == SIN) {
+    numStack = sin(a);
+  } else if (stack_peekType_(tmp_3) == COS) {
+    numStack = cos(a);
+  } else if (stack_peekType_(tmp_3) == TAN) {
+    numStack = tan(a);
+  } else if (stack_peekType_(tmp_3) == ASIN) {
+    numStack = asin(a);
+  } else if (stack_peekType_(tmp_3) == ACOS) {
+    numStack = acos(a);
+  } else if (stack_peekType_(tmp_3) == ATAN) {
+    numStack = atan(a);
+  } else if (stack_peekType_(tmp_3) == LN) {
+    numStack = log(a);
+  } else if (stack_peekType_(tmp_3) == LOG) {
+    numStack = log10(a);
+  } else if (stack_peekType_(tmp_3) == SQRT) {
+    numStack = sqrt(a);
+  }
+  tmp_2->priority = 0;
+  tmp_2->type = NUMBER;
+  tmp_2->value = numStack;
+  delStack(stack, tmp_3);
+}
+
+void calcFuncs_2(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2) {
+  double a = 0;
+  double numStack = 0;
+  a = tmp_1->value;
+  if (stack_peekType_(tmp_2) == UNPLUS) {
+    numStack = +a;
+  } else if (stack_peekType_(tmp_2) == UNMINUS) {
+    numStack = -a;
+  } else if (stack_peekType_(tmp_2) == SIN) {
+    numStack = sin(a);
+  } else if (stack_peekType_(tmp_2) == COS) {
+    numStack = cos(a);
+  } else if (stack_peekType_(tmp_2) == TAN) {
+    numStack = tan(a);
+  } else if (stack_peekType_(tmp_2) == ASIN) {
+    numStack = asin(a);
+  } else if (stack_peekType_(tmp_2) == ACOS) {
+    numStack = acos(a);
+  } else if (stack_peekType_(tmp_2) == ATAN) {
+    numStack = atan(a);
+  } else if (stack_peekType_(tmp_2) == LN) {
+    numStack = log(a);
+  } else if (stack_peekType_(tmp_2) == LOG) {
+    numStack = log10(a);
+  } else if (stack_peekType_(tmp_2) == SQRT) {
+    numStack = sqrt(a);
+  }
+  tmp_1->priority = 0;
+  tmp_1->type = NUMBER;
+  tmp_1->value = numStack;
+  delStack(stack, tmp_2);
+}
+
+void delStack(stack_t** result, stack_t* tmp) {
+  stack_t* tmp_in_function = {0};
+  tmp_in_function = *result;
+  if (*result == tmp) {
+    tmp_in_function = (*result)->next;
+    free(*result);
+    *result = tmp_in_function;
+  } else {
+    while (tmp_in_function->next != tmp) {
+      tmp_in_function = tmp_in_function->next;
+    }
+    tmp_in_function->next = tmp->next;
+    free(tmp);
   }
 }
 
@@ -331,9 +466,9 @@ int checkCorrectOperator(char* text, int* i) {
   int status = FAIL;
   char prev = text[(*i) - 1];
   char next = text[(*i) + 1];
-  if (((prev == 'x') || (isdigit(prev != 0) || (prev != NULL))) &&
+  if (((prev == 'x') || (isdigit(prev != 0) || (prev != '\0'))) &&
       ((funcsParentheses(text, i, 1) == OK) ||
-       (isdigit(next != 0) || (next != NULL)) && (next != ')'))) {
+       (isdigit(next != 0) || (next != '\0')) && (next != ')'))) {
     status = OK;
   }
   return status;

@@ -14,17 +14,21 @@
 #ifndef FAIL
 #define FAIL 1
 #endif
-
+// Mod,
+// Pow,
+// plus,
+// minus,
+// mult,
+// Div,
 // for checking during dubug
 typedef enum type_t {
   NUMBER = 1,
   PLUS,
-  UNPLUS,
   MINUS,
-  UNMINUS,
   MUL,
   DIV,
   POW,
+  MOD,
   OPENBRACKET,
   CLOSEBRACKET,
   LN,
@@ -32,11 +36,12 @@ typedef enum type_t {
   SIN,
   COS,
   TAN,
-  MOD,
   LOG,
   ASIN,
   ACOS,
-  ATAN
+  ATAN,
+  UNPLUS,
+  UNMINUS
 } type_t;
 
 /* priority
@@ -59,6 +64,7 @@ int entryPoint(char* text, double* double_result);
 int validator(char* text);
 void parser(char* text, stack_t** reverseTokens);
 void reversePolishNotation(stack_t* stack, stack_t** numStack);
+void calculate(stack_t** stack);
 // int isX(char* str);
 int isNumber(char* str, int* mod);
 int isDot(char* dot);
@@ -69,6 +75,11 @@ int isSign(char* text, int* i, int* dotCount);
 int isOper(char symb);
 int checkRatioBrackets(char* text, int text_length);
 int checkSupport(stack_t* helpStack, int priority);
+void calcLexems(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2,
+                stack_t* tmp_3);
+void calcFuncs(stack_t** stack, stack_t* tmp_2, stack_t* tmp_3);
+void calcFuncs_2(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2);
+void delStack(stack_t** result, stack_t* tmp);
 
 // stack funcs
 void stack_push_(double value, int priority, type_t type, stack_t** stack);
