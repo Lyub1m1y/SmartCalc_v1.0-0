@@ -1,14 +1,14 @@
 #include "smartcalc.h"
 
 // debug
-int main() {
-  int status = OK;
-  double double_result = 0.0;
-  char text[] = "5mod6+cos(7)+atan(20.505056)^30+7mod8";
-  status = entryPoint(text, &double_result);
-  printf("|status = %d|\n", status);
-  return status;
-}
+// int main() {
+//   int status = OK;
+//   double double_result = 0.0;
+//   char text[] = "5mod6+cos(7)+atan(20.505056)^30+7mod8";
+//   status = entryPoint(text, &double_result);
+//   printf("|status = %d|\n", status);
+//   return status;
+// }
 
 int entryPoint(char* text, double* double_result) {
   int status = OK;
@@ -17,7 +17,13 @@ int entryPoint(char* text, double* double_result) {
     parser(text, &reverseTokens);
     stack_t* tokens = NULL;
     stack_reverse_(&tokens, &reverseTokens);
-    stack_print_(tokens);
+
+    stack_t* reverseOutput = NULL;
+    reversePolishNotation(tokens, &reverseOutput);
+    stack_t* output = NULL;
+    stack_reverse_(&output, &reverseOutput);
+
+    stack_print_(output);  // TODO debug delete
   } else {
     status = FAIL;
   }
@@ -122,11 +128,48 @@ void parser(char* text, stack_t** reverseTokens) {
         stack_push_(0, 1, MINUS, reverseTokens);
       }
     }
-    // TODO нужно допилить парсер
   }
 }
 
-// Эта функция для проверки reverseTokens(var x) число это или чтобы заменить x
+void reversePolishNotation(stack_t* stack, stack_t** numStack) {
+  stack_t* supportStack = {0};
+  while (stack) {
+    if (stack_peekType_(stack) != CLOSEBRACKET) {
+      if (stack_peekType_(stack) == NUMBER) {
+        stack_push_(stack->value, stack->priority, stack_peekType_(stack),
+                    numStack);
+      } else {
+        while (1) {
+          if ((checkSupport(supportStack, stack->priority)) ||
+              stack_peekType_(stack) == OPENBRACKET) {
+            stack_push_(stack->value, stack->priority, stack_peekType_(stack),
+                        &supportStack);
+            break;
+          } else {
+            stack_push_(supportStack->value, supportStack->priority,
+                        supportStack->type, numStack);
+            stack_pop_(&supportStack);
+          }
+        }
+      }
+    } else {
+      while (supportStack->type != OPENBRACKET) {
+        stack_push_(supportStack->value, supportStack->priority,
+                    supportStack->type, numStack);
+        stack_pop_(&supportStack);
+      }
+      stack_pop_(&supportStack);
+    }
+    stack = stack->next;
+  }
+  while (supportStack) {
+    stack_push_(supportStack->value, supportStack->priority, supportStack->type,
+                numStack);
+    stack_pop_(&supportStack);
+  }
+}
+
+// Эта функция для проверки строки(var x) число это или чтобы заменить x
 // начисло
 int isNumber(char* str, int* mod) {
   int status = OK;
@@ -412,6 +455,21 @@ void stack_reverse_(stack_t** stack, stack_t** reverse_stack) {
     stack_pop_(reverse_stack);
   }
 }
+
+int stack_peekType_(stack_t* stack) { return stack->type; }
+
+int checkSupport(stack_t* helpStack, int priority) {
+  int numStack = 0;
+  if (helpStack != NULL) {
+    if (priority > helpStack->priority) {
+      numStack = 1;
+    }
+  } else {
+    numStack = 1;
+  }
+  return numStack;
+}
+
 // TODO del func stack_print__
 void stack_print_(stack_t* stack) {
   char delimeter[] = "";
