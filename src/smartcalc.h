@@ -36,8 +36,7 @@ typedef enum type_t {
   ATAN,
   UNPLUS,
   UNMINUS,
-  DOT,
-  X
+  DOT
 } type_t;
 
 /* priority
@@ -67,6 +66,7 @@ int isNumber(char* str, int* mod);
 int isDot(char* dot);
 int isSign(char* text, int* i, int* dotCount);
 int isOper(char symb);
+void chToTZ(char* text, int length, int need);
 int checkCorrectOperator(char* text, int* i);
 int checkCorrectOperator(char* text, int* i);
 int checkRatioBrackets(char* text, int text_length);

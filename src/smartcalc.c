@@ -2,14 +2,18 @@
 
 // debug
 // int main() {
-//   int status = OK;
-//   double double_result = 0.0;
-//   char text[] = "0.5+0.525";
-//   status = entryPoint(text, &double_result);
-//   printf("|double_result = %lf|\n", double_result);
+//   char text[] = "0.5+log(";
+//   int lenth = strlen(text);
+//   chToTZ(text, lenth, 4);
 //   printf("|text = [%s]|\n", text);
-//   printf("|status = %d|\n", status);
-//   return status;
+//   // int status = OK;
+//   // double double_result = 0.0;
+//   // char text[] = "0.5+0.525";
+//   // status = entryPoint(text, &double_result);
+//   // printf("|double_result = %lf|\n", double_result);
+//   // printf("|text = [%s]|\n", text);
+//   // printf("|status = %d|\n", status);
+//   // return status;
 // }
 
 int entryPoint(char* text, double* double_result) {
@@ -300,6 +304,12 @@ void comToDot(char* text) {
     if (text[i] == ',') {
       text[i] = '.';
     }
+  }
+}
+
+void chToTZ(char* text, int length, int need) {
+  for (int i = need; i > 0; i--) {
+    text[length - i] = '\0';
   }
 }
 

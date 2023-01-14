@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "math.h": "c",
-    "chrono": "cpp"
+    "chrono": "cpp",
+    "string_view": "cpp"
   }
 }

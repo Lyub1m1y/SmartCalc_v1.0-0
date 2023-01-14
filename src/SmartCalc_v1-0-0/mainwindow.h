@@ -29,7 +29,6 @@ class MainWindow : public QMainWindow {
  public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
-  int last_button = 0;
  private slots:
 
   void on_Help_clicked();

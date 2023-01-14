@@ -71,50 +71,55 @@ void MainWindow::on_Help_clicked() {
 void MainWindow::on_Button_del_clicked() { ui->OutputLabel->setText("0"); }
 
 void MainWindow::on_Button_del_last_clicked() {
-  QString text = ui->OutputLabel->text();
-  int last = MainWindow::last_button;
-  if (last == NUMBER) {
-    text.chop(1);
-  } else if (last == PLUS) {
-    text.chop(1);
-  } else if (last == MINUS) {
-    text.chop(1);
-  } else if (last == MUL) {
-    text.chop(1);
-  } else if (last == DIV) {
-    text.chop(1);
-  } else if (last == POW) {
-    text.chop(1);
-  } else if (last == MOD) {
-    text.chop(3);
-  } else if (last == OPENBRACKET) {
-    text.chop(1);
-  } else if (last == CLOSEBRACKET) {
-    text.chop(1);
-  } else if (last == LN) {
-    text.chop(3);
-  } else if (last == SQRT) {
-    text.chop(5);
-  } else if (last == SIN) {
-    text.chop(4);
-  } else if (last == COS) {
-    text.chop(4);
-  } else if (last == TAN) {
-    text.chop(4);
-  } else if (last == LOG) {
-    text.chop(4);
-  } else if (last == ASIN) {
-    text.chop(5);
-  } else if (last == ACOS) {
-    text.chop(5);
-  } else if (last == ATAN) {
-    text.chop(5);
-  } else if (last == DOT) {
-    text.chop(1);
-  } else if (last == X) {
-    text.chop(1);
+  QString temp_text = ui->OutputLabel->text();
+  QByteArray ba = temp_text.toLocal8Bit();
+  char *text = ba.data();
+  int length = strlen(text);
+  length--;
+  if (isdigit(text[length]) != 0) {
+    text[length] = '\0';
+  } else if (text[length] == 'x') {
+    text[length] = '\0';
+  } else if (text[length] == '.') {
+    text[length] = '\0';
+  } else if (text[length] == '(') {
+    if (text[length - 1] == 'n') {
+      if (text[length - 4] == 'a') {
+        chToTZ(text, length, 4);
+      } else if ((text[length - 3] == 't') || (text[length - 3] == 's')) {
+        chToTZ(text, length, 3);
+      } else if (text[length - 2] == 'l') {
+        chToTZ(text, length, 2);
+      }
+    } else if (text[length - 1] == 'g') {
+      chToTZ(text, length, 3);
+    } else if (text[length - 1] == 't') {
+      chToTZ(text, length, 4);
+    } else if (text[length - 1] == 's') {
+      if (text[length - 4] == 'a') {
+        chToTZ(text, length, 4);
+      } else {
+        chToTZ(text, length, 3);
+      }
+    } else {
+      text[length] = '\0';
+    }
+  } else if (text[length] == 'd') {
+    chToTZ(text, length, 2);
+  } else if (text[length] == ')') {
+    text[length] = '\0';
+  } else if (text[length] == '+') {
+    text[length] = '\0';
+  } else if (text[length] == '-') {
+    text[length] = '\0';
+  } else if (text[length] == '*') {
+    text[length] = '\0';
+  } else if (text[length] == '/') {
+    text[length] = '\0';
+  } else if (text[length] == '^') {
+    text[length] = '\0';
   }
-  ui->OutputLabel->setText(text);
+  ui->OutputLabel->setText(QString(text));
   MainWindow::checkVoid();
 }
 
@@ -130,7 +135,6 @@ void MainWindow::on_Button_d_0_clicked() {
   } else {
     ui->OutputLabel->setText("0");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_1_clicked() {
@@ -139,7 +143,6 @@ void MainWindow::on_Button_d_1_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "1");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_2_clicked() {
@@ -148,7 +151,6 @@ void MainWindow::on_Button_d_2_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "2");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_3_clicked() {
@@ -157,7 +159,6 @@ void MainWindow::on_Button_d_3_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "3");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_4_clicked() {
@@ -166,7 +167,6 @@ void MainWindow::on_Button_d_4_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "4");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_5_clicked() {
@@ -175,7 +175,6 @@ void MainWindow::on_Button_d_5_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "5");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_6_clicked() {
@@ -184,7 +183,6 @@ void MainWindow::on_Button_d_6_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "6");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_7_clicked() {
@@ -193,7 +191,6 @@ void MainWindow::on_Button_d_7_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "7");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_8_clicked() {
@@ -202,7 +199,6 @@ void MainWindow::on_Button_d_8_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "8");
   }
-  MainWindow::last_button = NUMBER;
 }
 
 void MainWindow::on_Button_d_9_clicked() {
@@ -211,7 +207,6 @@ void MainWindow::on_Button_d_9_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "9");
   }
-  MainWindow::last_button = NUMBER;
 }
 void MainWindow::on_Button_X_clicked() {
   QString temp = ui->OutputLabel->text();
@@ -222,7 +217,6 @@ void MainWindow::on_Button_X_clicked() {
       ui->OutputLabel->setText(ui->OutputLabel->text() + "x");
     }
   }
-  MainWindow::last_button = X;
 }
 
 void MainWindow::on_Button_OpenBr_clicked() {
@@ -233,7 +227,6 @@ void MainWindow::on_Button_OpenBr_clicked() {
   } else if (last != ')') {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "(");
   }
-  MainWindow::last_button = OPENBRACKET;
 }
 
 void MainWindow::on_Button_CloseBr_clicked() {
@@ -244,7 +237,6 @@ void MainWindow::on_Button_CloseBr_clicked() {
   } else if (last != '(') {
     ui->OutputLabel->setText(ui->OutputLabel->text() + ")");
   }
-  MainWindow::last_button = CLOSEBRACKET;
 }
 
 void MainWindow::on_Button_dot_clicked() {
@@ -253,7 +245,6 @@ void MainWindow::on_Button_dot_clicked() {
   if ((checkOperation(temp_text) != 1) && (last != '(') && (last != ')')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + ".");
   }
-  MainWindow::last_button = DOT;
 }
 
 void MainWindow::on_Button_plus_clicked() {
@@ -262,14 +253,12 @@ void MainWindow::on_Button_plus_clicked() {
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "+");
   }
-  MainWindow::last_button = PLUS;
 }
 
 void MainWindow::on_Button_minus_clicked() {
   if (checkOperation((ui->OutputLabel->text())) != 1) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "-");
   }
-  MainWindow::last_button = MINUS;
 }
 
 void MainWindow::on_Button_mult_clicked() {
@@ -278,7 +267,6 @@ void MainWindow::on_Button_mult_clicked() {
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "*");
   }
-  MainWindow::last_button = MUL;
 }
 
 void MainWindow::on_Button_div_clicked() {
@@ -287,7 +275,6 @@ void MainWindow::on_Button_div_clicked() {
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "/");
   }
-  MainWindow::last_button = DIV;
 }
 
 void MainWindow::on_Button_sq_clicked() {
@@ -296,7 +283,6 @@ void MainWindow::on_Button_sq_clicked() {
   if ((checkOperation((ui->OutputLabel->text())) != 1) && (last != '(')) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "^");
   }
-  MainWindow::last_button = POW;
 }
 
 void MainWindow::on_Button_ln_clicked() {
@@ -305,7 +291,6 @@ void MainWindow::on_Button_ln_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "ln(");
   }
-  MainWindow::last_button = LN;
 }
 
 void MainWindow::on_Button_sqrt_clicked() {
@@ -314,7 +299,6 @@ void MainWindow::on_Button_sqrt_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "sqrt(");
   }
-  MainWindow::last_button = SQRT;
 }
 
 void MainWindow::on_Button_sin_clicked() {
@@ -323,7 +307,6 @@ void MainWindow::on_Button_sin_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "sin(");
   }
-  MainWindow::last_button = SIN;
 }
 
 void MainWindow::on_Button_cos_clicked() {
@@ -332,7 +315,6 @@ void MainWindow::on_Button_cos_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "cos(");
   }
-  MainWindow::last_button = COS;
 }
 
 void MainWindow::on_Button_tan_clicked() {
@@ -341,7 +323,6 @@ void MainWindow::on_Button_tan_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "tan(");
   }
-  MainWindow::last_button = TAN;
 }
 
 void MainWindow::on_Button_atan_clicked() {
@@ -350,7 +331,6 @@ void MainWindow::on_Button_atan_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "atan(");
   }
-  MainWindow::last_button = ATAN;
 }
 
 void MainWindow::on_Button_acos_clicked() {
@@ -359,7 +339,6 @@ void MainWindow::on_Button_acos_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "acos(");
   }
-  MainWindow::last_button = ACOS;
 }
 
 void MainWindow::on_Button_asin_clicked() {
@@ -368,7 +347,6 @@ void MainWindow::on_Button_asin_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "asin(");
   }
-  MainWindow::last_button = ASIN;
 }
 
 void MainWindow::on_Button_log_clicked() {
@@ -377,14 +355,12 @@ void MainWindow::on_Button_log_clicked() {
   } else {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "log(");
   }
-  MainWindow::last_button = LOG;
 }
 
 void MainWindow::on_Button_mod_clicked() {
   if (checkOperation((ui->OutputLabel->text())) != 1) {
     ui->OutputLabel->setText(ui->OutputLabel->text() + "mod");
   }
-  MainWindow::last_button = MOD;
 }
 
 QString replaceVarX(QString str1, QString str2) {
