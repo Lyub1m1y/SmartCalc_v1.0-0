@@ -14,13 +14,7 @@
 #ifndef FAIL
 #define FAIL 1
 #endif
-// Mod,
-// Pow,
-// plus,
-// minus,
-// mult,
-// Div,
-// for checking during dubug
+
 typedef enum type_t {
   NUMBER = 1,
   PLUS,
@@ -41,7 +35,9 @@ typedef enum type_t {
   ACOS,
   ATAN,
   UNPLUS,
-  UNMINUS
+  UNMINUS,
+  DOT,
+  X
 } type_t;
 
 /* priority

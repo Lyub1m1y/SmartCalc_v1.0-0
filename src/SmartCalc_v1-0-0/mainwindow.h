@@ -1,13 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include <QDesktopServices>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QString>
 #include <QUrl>
 #include <string>
-#include <QDebug>
 
 #include "ui_mainwindow.h"
 
@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow {
  public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
+  int last_button = 0;
  private slots:
 
   void on_Help_clicked();
@@ -94,6 +95,10 @@ class MainWindow : public QMainWindow {
   void on_Button_log_clicked();
 
   void on_Button_mod_clicked();
+
+  void on_Button_del_last_clicked();
+
+  void checkVoid();
 
  private:
   Ui::MainWindow *ui;

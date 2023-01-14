@@ -211,9 +211,9 @@ void calcLexems(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2,
   } else if (stack_peekType_(tmp_3) == DIV) {
     numStack = a / b;
   } else if (stack_peekType_(tmp_3) == POW) {
-    numStack = pow(a, b);  // если // то дебагер запускается
+    numStack = pow(a, b);
   } else if (stack_peekType_(tmp_3) == MOD) {
-    numStack = fmod(a, b);  // если // то дебагер запускается
+    numStack = fmod(a, b);
   }
   tmp_1->priority = 0;
   tmp_1->type = NUMBER;
