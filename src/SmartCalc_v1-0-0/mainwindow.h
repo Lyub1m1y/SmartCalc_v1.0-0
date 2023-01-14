@@ -7,6 +7,7 @@
 #include <QString>
 #include <QUrl>
 #include <string>
+#include <QDebug>
 
 #include "ui_mainwindow.h"
 

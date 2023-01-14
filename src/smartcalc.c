@@ -4,8 +4,10 @@
 // int main() {
 //   int status = OK;
 //   double double_result = 0.0;
-//   char text[] = "2+2";
+//   char text[] = "0.5+0.525";
 //   status = entryPoint(text, &double_result);
+//   printf("|double_result = %lf|\n", double_result);
+//   printf("|text = [%s]|\n", text);
 //   printf("|status = %d|\n", status);
 //   return status;
 // }
@@ -24,13 +26,11 @@ int entryPoint(char* text, double* double_result) {
     stack_reverse_(&output, &reverseOutput);
 
     calculate(&output);
-    // sprintf(text, "%lf", output->value);
     *double_result = output->value;
     // stack_print_(output);  // TODO debug delete
   } else {
     status = FAIL;
   }
-  // *double_result = 99999.9;
   return status;
 }
 
@@ -192,7 +192,7 @@ void calculate(stack_t** stack) {
         calcFuncs(stack, tmp_2, tmp_3);
       }
     } else {
-      calcFuncs_2(stack, tmp_1, tmp_2);
+      calcFuncs(stack, tmp_1, tmp_2);
     }
   }
 }
@@ -211,9 +211,9 @@ void calcLexems(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2,
   } else if (stack_peekType_(tmp_3) == DIV) {
     numStack = a / b;
   } else if (stack_peekType_(tmp_3) == POW) {
-    numStack = pow(a, b);
+    numStack = pow(a, b);  // если // то дебагер запускается
   } else if (stack_peekType_(tmp_3) == MOD) {
-    numStack = fmod(a, b);
+    numStack = fmod(a, b);  // если // то дебагер запускается
   }
   tmp_1->priority = 0;
   tmp_1->type = NUMBER;
@@ -255,39 +255,6 @@ void calcFuncs(stack_t** stack, stack_t* tmp_2, stack_t* tmp_3) {
   delStack(stack, tmp_3);
 }
 
-void calcFuncs_2(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2) {
-  double a = 0;
-  double numStack = 0;
-  a = tmp_1->value;
-  if (stack_peekType_(tmp_2) == UNPLUS) {
-    numStack = +a;
-  } else if (stack_peekType_(tmp_2) == UNMINUS) {
-    numStack = -a;
-  } else if (stack_peekType_(tmp_2) == SIN) {
-    numStack = sin(a);
-  } else if (stack_peekType_(tmp_2) == COS) {
-    numStack = cos(a);
-  } else if (stack_peekType_(tmp_2) == TAN) {
-    numStack = tan(a);
-  } else if (stack_peekType_(tmp_2) == ASIN) {
-    numStack = asin(a);
-  } else if (stack_peekType_(tmp_2) == ACOS) {
-    numStack = acos(a);
-  } else if (stack_peekType_(tmp_2) == ATAN) {
-    numStack = atan(a);
-  } else if (stack_peekType_(tmp_2) == LN) {
-    numStack = log(a);
-  } else if (stack_peekType_(tmp_2) == LOG) {
-    numStack = log10(a);
-  } else if (stack_peekType_(tmp_2) == SQRT) {
-    numStack = sqrt(a);
-  }
-  tmp_1->priority = 0;
-  tmp_1->type = NUMBER;
-  tmp_1->value = numStack;
-  delStack(stack, tmp_2);
-}
-
 void delStack(stack_t** result, stack_t* tmp) {
   stack_t* tmp_in_function = {0};
   tmp_in_function = *result;
@@ -326,77 +293,15 @@ int isNumber(char* str, int* mod) {
   (*mod) = i;
   return status;
 }
-// int checkSin(char* sin, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&sin[(*mod)]), "sin(", 4)) {
-//     status = OK;
-//   }
-//   return status;
-// }
 
-// int checkCos(char* cos, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&cos[(*mod)]), "cos(", 4)) {
-//     status = OK;
-//   }
-//   return status;
-// }
-
-// int checkTan(char* tan, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&tan[(*mod)]), "tan(", 4)) {
-//     status = OK;
-//   }
-//   return status;
-// }
-
-// int checkAcos(char* acos, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&acos[(*mod)]), "acos(", 5)) {
-//     status = OK;
-//   }
-//   return status;
-// }
-
-// int checkAtan(char* atan, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&atan[(*mod)]), "atan(", 5)) {
-//     status = OK;
-//   }
-//   return status;
-// }
-
-// int checkAsin(char* asin, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&asin[(*mod)]), "asin(", 5)) {
-//     status = OK;
-//   }
-//   return status;
-// }
-
-// int checkSqrt(char* sqrt, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&sqrt[(*mod)]), "sqrt(", 5)) {
-//     status = OK;
-//   }
-//   return status;
-// }
-
-// int checkLn(char* ln, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&ln[(*mod)]), "ln(", 3)) {
-//     status = OK;
-//   }
-//   return status;
-// }
-
-// int checkLog(char* log, int* mod) {
-//   int status = FAIL;
-//   if (strncmp((&log[(*mod)]), "log(", 4)) {
-//     status = OK;
-//   }
-//   return status;
-// }
+void comToDot(char* text) {
+  int text_length = strlen(text);
+  for (int i = 0; i < text_length; i++) {
+    if (text[i] == ',') {
+      text[i] = '.';
+    }
+  }
+}
 
 int isDot(char* dot) {
   int status = FAIL;

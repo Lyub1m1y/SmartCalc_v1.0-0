@@ -7,8 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 // push text(task) in backend
 void MainWindow::on_Button_res_clicked() {
-  // dubug
-  //  QString temp_text = "5+(atan(8))";
   QString temp_text = ui->OutputLabel->text();
   QString needle = ui->line_x->text();
   QByteArray ba_x = needle.toLocal8Bit();
@@ -25,10 +23,9 @@ void MainWindow::on_Button_res_clicked() {
   QByteArray ba = temp_text.toLocal8Bit();
   char *text = ba.data();
   double double_result = 0.0;
-  if (entryPoint(text, &double_result) == OK) {
-        ui->OutputLabel->setText(QString::number(double_result, 'f', 7));// Выдает 4.000000
-//    ui->OutputLabel->setText(temp_text);
-//      ui->OutputLabel->setText(QString::number(double_result, 'g', 15)); // Выдает 4
+  int status = entryPoint(text, &double_result);
+  if (status == OK) {
+      ui->OutputLabel->setText(QString::number(double_result, 'g', 15));
   } else {
     QMessageBox::critical(this, "Invalid expression", "Invalid input");
   }
