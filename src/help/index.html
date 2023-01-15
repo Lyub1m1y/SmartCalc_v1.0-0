@@ -1,27 +1,34 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>SmartCalc</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCalc_v1-0-0</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div style="max-width: 600px; margin: 100px auto; text-align: center;">
-        <h1>SmartCalc</h1>
+    <div class="container">
+        <h1>SmartCalc_v1-0-0</h1>
 
         <h2>О программе</h2>
-        <p>Расширенна версия обычного калькулятора,
+        <p>Расширенная версия обычного калькулятора,
             который можно найти в стандартных приложениях каждой операционной системы.
             Помимо базовых арифметических операций, как плюс-минус и умножить-поделить,
             калькулятор имеет возможность вычисления арифметических выражений с учетом приоритетов,
             а так же некоторых математических функций (синус, косинус, логарифм и т.д.).
             Помимо вычисления выражений калькулятор так же поддерживает использование переменной x
-            и построение графика соответствующей функции.</p>
+            и построение графика соответствующей функции. <br>
+            Данный калькулятор имеет ещё 2 дополнительных режима: кредитный и
+            депозитный.
+        </p>
 
-        <div style="display: flex; justify-content: center;">
-            <div style="padding-right:50px;">
+        <div class="cont-lists">
+            <div class="list">
                 <h3>Арифметические операторы</h3>
-                <ul style="list-style-type: none; padding: 0;">
+                <ul">
                     <li>Скобки</li>
                     <li>Сложение</li>
                     <li>Вычитание</li>
@@ -31,11 +38,11 @@
                     <li>Остаток от деления</li>
                     <li>Унарный плюс</li>
                     <li>Унарный минус</li>
-                </ul>
+                    </ul>
             </div>
             <div>
                 <h3>Функции</h3>
-                <ul style="list-style-type: none; padding: 0;">
+                <ul">
                     <li>Вычисляет косинус</li>
                     <li>Вычисляет синус</li>
                     <li>Вычисляет тангенс</li>
@@ -45,12 +52,13 @@
                     <li>Вычисляет квадратный корень</li>
                     <li>Вычисляет натуральный логарифм</li>
                     <li>Вычисляет десятичный логарифм</li>
-                </ul>
+                    </ul>
             </div>
         </div>
 
         <h2>Установка</h2>
-        <p>Для того, чтобы начать использовать калькулятор вам нужно использовать команду make install.</p>
+        <p>Для установки вам требуется использовать команду: "make install", и чтобы
+            открыть приложение используйте команду: "make open".</p>
 
         <h2>Удаление</h2>
         <p>Для удаления программы вы можете использовать команду make uninstall.</p>

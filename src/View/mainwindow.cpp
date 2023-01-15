@@ -65,7 +65,7 @@ int checkOperation(QString text) {
 }
 
 void MainWindow::on_Help_clicked() {
-  QDesktopServices::openUrl(QUrl("../dvi.html", QUrl::TolerantMode));
+  QDesktopServices::openUrl(QUrl("help/index.html", QUrl::TolerantMode));
 }
 
 void MainWindow::on_Button_del_clicked() { ui->OutputLabel->setText("0"); }

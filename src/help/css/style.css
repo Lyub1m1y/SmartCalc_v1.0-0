@@ -1,0 +1,30 @@
+body {
+    background-color: #121212;
+}
+.container {
+    max-width: 600px; 
+    margin: 70px auto; 
+    text-align: center;
+}
+
+.cont-lists {
+    display: flex; 
+    justify-content: center;
+}
+
+.list {
+    padding-right:50px;
+}
+
+h1, h2, h3 {
+    color: #f4f4f4;
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0;
+}
+
+p, li {
+    color: #777;
+}

@@ -7,8 +7,8 @@
 #include <QMessageBox>
 #include <QString>
 #include <QUrl>
-#include <string>
 #include <QVector>
+#include <string>
 
 #include "ui_mainwindow.h"
 
@@ -102,7 +102,7 @@ class MainWindow : public QMainWindow {
 
   void on_Button_Grath_clicked();
 
-private:
+ private:
   Ui::MainWindow *ui;
   double xBegin, xEnd, h, X = 0.0;
   int N;
