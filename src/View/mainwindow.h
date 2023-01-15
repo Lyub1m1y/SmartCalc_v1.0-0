@@ -13,7 +13,7 @@
 #include "ui_mainwindow.h"
 
 extern "C" {
-#include "../smartcalc.h"
+#include "../Model/smartcalc.h"
 }
 
 QString replaceVarX(QString str1, QString str2);

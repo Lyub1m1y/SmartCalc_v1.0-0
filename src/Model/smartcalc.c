@@ -373,19 +373,25 @@ int checkCorrectOperator(char* text, int* i) {
   int status = FAIL;
   char prev = text[(*i) - 1];
   char next = text[(*i) + 1];
-  if (((prev == 'x') || (isdigit(prev != 0) || (prev != '\0'))) &&
-      ((funcsParentheses(text, i, 1) == OK) ||
-       (isdigit(next != 0) || (next != '\0')) && (next != ')'))) {
-    status = OK;
+  if ((prev == 'x') || (isdigit(prev != 0)) || (prev != '\0')) {
+    if ((funcsParentheses(text, i, 1) == OK) ||
+        (isdigit(next != 0) || (next != '\0'))) {
+      if ((next != ')')) {
+        status = OK;
+      }
+    }
   }
+  // if (((prev == 'x') || (isdigit(prev != 0) || (prev != '\0'))) &&
+  //     ((funcsParentheses(text, i, 1) == OK) ||
+  //      (isdigit(next != 0) || (next != '\0')) && (next != ')'))) {
+  //   status = OK;
+  // }
   return status;
 }
 
 int isSign(char* text, int* i, int* dotCount) {
   int status = FAIL;
   char symb = text[(*i)];
-  char prev = text[(*i) - 1];
-  char next = text[(*i) + 1];
   if (symb == '+') {
     if (checkCorrectOperator(text, i) == 0) {
       status = OK;

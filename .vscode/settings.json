@@ -2,6 +2,10 @@
   "files.associations": {
     "math.h": "c",
     "chrono": "cpp",
-    "string_view": "cpp"
+    "string_view": "cpp",
+    "array": "cpp",
+    "initializer_list": "cpp",
+    "utility": "cpp",
+    "sstream": "cpp"
   }
 }
