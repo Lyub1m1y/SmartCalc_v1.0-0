@@ -16,11 +16,11 @@
 //   // return status;
 // }
 
-int entryPoint(char* text, double* double_result) {
+int entryPoint(char* text, double* double_result, double x_value) {
   int status = OK;
   if (validator(text) == OK) {
     stack_t* reverseTokens = NULL;
-    parser(text, &reverseTokens);
+    parser(text, &reverseTokens, x_value);
     stack_t* tokens = NULL;
     stack_reverse_(&tokens, &reverseTokens);
 
@@ -31,7 +31,6 @@ int entryPoint(char* text, double* double_result) {
 
     calculate(&output);
     *double_result = output->value;
-    // stack_print_(output);  // TODO debug delete
   } else {
     status = FAIL;
   }
@@ -61,7 +60,7 @@ int validator(char* text) {
   return status;
 }
 
-void parser(char* text, stack_t** reverseTokens) {
+void parser(char* text, stack_t** reverseTokens, double x_value) {
   int text_length = strlen(text);
   for (int i = 0; i < text_length; i++) {
     if (isdigit(text[i]) != 0) {
@@ -76,6 +75,8 @@ void parser(char* text, stack_t** reverseTokens) {
       i--;
       sscanf(number, "%lf", &value);
       stack_push_(value, 0, NUMBER, reverseTokens);
+    } else if (text[i] == 'x') {
+      stack_push_(x_value, 0, NUMBER, reverseTokens);
     } else if (text[i] == '(') {
       stack_push_(0, 0, OPENBRACKET, reverseTokens);
     } else if (text[i] == ')') {
@@ -298,15 +299,6 @@ int isNumber(char* str, int* mod) {
   return status;
 }
 
-void comToDot(char* text) {
-  int text_length = strlen(text);
-  for (int i = 0; i < text_length; i++) {
-    if (text[i] == ',') {
-      text[i] = '.';
-    }
-  }
-}
-
 void chToTZ(char* text, int length, int need) {
   for (int i = need; i > 0; i--) {
     text[length - i] = '\0';
@@ -520,21 +512,6 @@ int checkSupport(stack_t* helpStack, int priority) {
   return numStack;
 }
 
-// TODO del func stack_print__
-void stack_print_(stack_t* stack) {
-  char delimeter[] = "";
-  stack_t* tmp = stack;
-  while (tmp != NULL) {
-    printf("[");
-    printf("\"%f\",", tmp->value);
-    printf("\"%d\",", tmp->priority);
-    printf("\"%d\",", tmp->type);
-    if (tmp == NULL) break;
-    tmp = tmp->next;
-    printf("]\n");
-  }
-}
-
 stack_t* stack_free_(stack_t* list) {
   while (list != NULL) {
     stack_t* temporary = list;
@@ -543,14 +520,3 @@ stack_t* stack_free_(stack_t* list) {
   }
   return NULL;
 }
-
-// int isX(char* str) {
-//   int status = FAIL;
-//   int str_length = strlen(str);
-//   for (int i = 0; i < str_length; i++) {
-//     if (str[i] == 'x') {
-//       status = OK;
-//     }
-//   }
-//   return status;
-// }

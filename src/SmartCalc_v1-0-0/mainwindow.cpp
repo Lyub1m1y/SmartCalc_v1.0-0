@@ -23,7 +23,7 @@ void MainWindow::on_Button_res_clicked() {
   QByteArray ba = temp_text.toLocal8Bit();
   char *text = ba.data();
   double double_result = 0.0;
-  int status = entryPoint(text, &double_result);
+  int status = entryPoint(text, &double_result, X);
   if (status == OK) {
     ui->OutputLabel->setText(QString::number(double_result, 'g', 15));
   } else {
@@ -375,4 +375,46 @@ QString replaceVarX(QString str1, QString str2) {
   }
   str1 = QString::fromStdString(haystack);
   return str1;
+}
+
+void MainWindow::on_Button_Grath_clicked() {
+  ui->widget->clearGraphs();
+  QString temp_str = ui->OutputLabel->text();
+  QByteArray ba = temp_str.toLocal8Bit();
+  char *str = ba.data();
+
+  double x_begin = ui->spinBoxXBegin->text().toDouble();
+  double x_end = ui->spinBoxXEnd->text().toDouble();
+  double y_begin = ui->spinBoxYBegin->text().toDouble();
+  double y_end = ui->spinBoxYEnd->text().toDouble();
+
+  ui->widget->xAxis->setRange(x_begin, x_end);
+  ui->widget->yAxis->setRange(y_begin, y_end);
+
+  h = 0.1;
+  xBegin = x_begin;
+  xEnd = x_end;
+
+  N = (xBegin - xEnd) / h + 2;
+
+  int status = OK;
+
+  for (X = xBegin; X < xEnd && status == 0; X += h) {
+    x.push_back(X);
+    double res = 0.0;
+    status = entryPoint(str, &res, X);
+    y.push_back(res);
+  }
+
+  if (status == FAIL) {
+    QMessageBox::critical(this, "Invalid expression", "Invalid input");
+  } else {
+    ui->widget->addGraph();
+    ui->widget->graph(0)->addData(x, y);
+
+    ui->widget->replot();
+  }
+
+  x.clear();
+  y.clear();
 }

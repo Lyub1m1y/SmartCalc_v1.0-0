@@ -8,6 +8,7 @@
 #include <QString>
 #include <QUrl>
 #include <string>
+#include <QVector>
 
 #include "ui_mainwindow.h"
 
@@ -99,7 +100,12 @@ class MainWindow : public QMainWindow {
 
   void checkVoid();
 
- private:
+  void on_Button_Grath_clicked();
+
+private:
   Ui::MainWindow *ui;
+  double xBegin, xEnd, h, X = 0.0;
+  int N;
+  QVector<double> x, y;
 };
 #endif  // MAINWINDOW_H
