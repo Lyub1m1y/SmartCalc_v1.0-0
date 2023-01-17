@@ -34,7 +34,8 @@ uninstall:
 	@rm -rf SmartCalc_v1-0-0
 
 clean:
-	@rm -rf *.{a,o,dSYM,out}
+	@rm -rf *.{a,dSYM,out}
+	@rm -rf **/**.o **.o
 	@rm -rf $(EXECUTABLE)
 	@rm -rf gcov_report
 	@rm -rf report
@@ -47,6 +48,7 @@ clean:
 	@rm -rf gcov_test
 	@rm -rf .clang-format
 	@rm -rf ../Archive_SmartCalc_v1.0.*
+	@rm -rf build-SmartCalc_v1-0-0-Desktop-Release/
 	@rm -rf test
 	@rm -rf leaks
 

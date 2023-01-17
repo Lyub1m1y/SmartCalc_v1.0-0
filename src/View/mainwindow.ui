@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>492</width>
-    <height>639</height>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,9 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>6</x>
@@ -36,7 +39,7 @@
      <bool>false</bool>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="simple">
      <attribute name="title">
@@ -1289,18 +1292,248 @@ QPushButton:pressed {
      <attribute name="title">
       <string>Кредитный</string>
      </attribute>
-     <widget class="QRadioButton" name="radioButton">
+     <widget class="QWidget" name="gridLayoutWidget_5">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>170</y>
-        <width>112</width>
-        <height>23</height>
+        <x>30</x>
+        <y>20</y>
+        <width>411</width>
+        <height>263</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Кредит</string>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_term_credit_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Срок кредита:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="edit_interest_rate">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" rowspan="2">
+        <widget class="QLabel" name="label_type_payments_2">
+         <property name="text">
+          <string>Тип ежемесячных платежей: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="edit_sum_credit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_sum_credit_2">
+         <property name="text">
+          <string>Сумма кредита:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QRadioButton" name="radioButton_ann">
+         <property name="text">
+          <string>Аннуитетный</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_interest_rate_2">
+         <property name="text">
+          <string>Процентная ставка:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="edit_term_credit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QRadioButton" name="radioButton_diff">
+         <property name="text">
+          <string>Дифференцированный</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>310</y>
+        <width>411</width>
+        <height>202</height>
+       </rect>
       </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_overpayment_credit">
+         <property name="text">
+          <string>Переплата по кредиту:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="edit_overpayment_credit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_total_payout__credit_3">
+         <property name="text">
+          <string>Общая выплата:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_mounthly_payment_credit">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Ежемесячный платеж:             </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="edit_total_payout__credit_3">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="edit_mounthly_payment_credit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="deposit">
@@ -1352,7 +1585,7 @@ QPushButton:pressed {
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header>../ExtLibs/qcustomplot.h</header>
+   <header location="global">../ExtLibs/qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
