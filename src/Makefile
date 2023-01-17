@@ -1,16 +1,17 @@
-.PHONY: all, install, uninstall, clean, dvi, dist, tests, gcov_report
+.PHONY: all, install, uninstall, clean, dvi, dist, tests, gcov_report, check, leaks
 
 OS := $(shell uname -s)
-SRC =  smartcalc.c
-SRC_FOR_TEST =  smartcalc.c
+SRC =  Model/smartcalc.c
+SRC_FOR_TEST =  Model/smartcalc.c
 OBJ = $(SRC:%.c=%.o)
 
 CC = gcc -std=c11
 
-CFLAGS	= -Wall -Werror -Wextra 
+# CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	=
 FLAGS_PLATFORM = -lcheck
 
-TEST = s21_calc_test.c
+TEST = Test/test_smartcalc.c
 FLAGS_PLATFORM = -lcheck
 
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
@@ -46,9 +47,11 @@ clean:
 	@rm -rf gcov_test
 	@rm -rf .clang-format
 	@rm -rf ../Archive_SmartCalc_v1.0.*
+	@rm -rf test
+	@rm -rf leaks
 
 dvi:
-	open ./help/index.html
+	open ./Help/index.html
 
 
 dist: 
@@ -58,8 +61,8 @@ dist:
 	cd ../ && tar -cvzf Archive_SmartCalc_v1.0.tar.gz Archive_SmartCalc_v1.0
 
 test:
-	@$(CC) $(CFLAGS) $(TEST) $(SRC_FOR_TEST) $(FLAGS_PLATFORM) -o tests.out
-	@./tests.out
+	@$(CC) $(CFLAGS) $(TEST) $(SRC_FOR_TEST) $(FLAGS_PLATFORM) -o test
+	@./test
 
 gcov_report:
 	gcc $(GCOVFLAGS) $(TEST) $(SRC) $(FLAGS_PLATFORM) -o $(REPORT)
@@ -80,10 +83,9 @@ check:
 	@cp ../materials/linters/CPPLINT.cfg .
 	python3 ../materials/linters/cpplint.py --extensions=c **/*.c
 	clang-format -style=Google -n **/*.c
-	# cppcheck --enable=all --suppress=missingIncludeSystem **/*.c
 	# @make leaks
 
-leaks:
-	@echo -------------------MEMORY_TEST-------------------
-	$(CC) -g $(TEST) $(SRC) $(FLAGS_PLATFORM) -o unit.out
-	CK_FORK=no leaks --atExit -- ./unit.out
+# leaks:
+# 	@echo -------------------MEMORY_TEST-------------------
+# 	$(CC) -g $(TEST) $(SRC) $(FLAGS_PLATFORM) -o leaks
+# 	CK_FORK=no leaks --atExit -- ./leaks

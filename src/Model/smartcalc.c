@@ -31,6 +31,11 @@ int entryPoint(char* text, double* double_result, double x_value) {
 
     calculate(&output);
     *double_result = output->value;
+
+    stack_free_(reverseTokens);
+    stack_free_(tokens);
+    stack_free_(reverseOutput);
+    stack_free_(output);
   } else {
     status = FAIL;
   }
@@ -278,11 +283,11 @@ void delStack(stack_t** result, stack_t* tmp) {
 
 // Эта функция для проверки строки(var x) число это или чтобы заменить x
 // начисло
-int isNumber(char* str, int* mod) {
+int isNumber(char* str) {
   int status = OK;
   int dotCount = 0;
-  int i = (*mod);
-  while (((isdigit(str[i]) == OK) || (str[i] == '.')) && (status != FAIL)) {
+  int text_length = strlen(str);
+  for (int i = 0; i < text_length && status != FAIL; i++) {
     if (isdigit(str[i]) == OK) {
       if (str[i] != '.') {
         status = FAIL;
@@ -293,9 +298,7 @@ int isNumber(char* str, int* mod) {
         }
       }
     }
-    i++;
   }
-  (*mod) = i;
   return status;
 }
 
@@ -371,21 +374,21 @@ int funcsParentheses(char* text, int* i, int sum) {
 
 int checkCorrectOperator(char* text, int* i) {
   int status = FAIL;
-  char prev = text[(*i) - 1];
+  char prev;
+  if ((*i) == 0) {
+    prev = '\0';
+  } else {
+    prev = text[(*i) - 1];
+  }
   char next = text[(*i) + 1];
-  if ((prev == 'x') || (isdigit(prev != 0)) || (prev != '\0')) {
-    if ((funcsParentheses(text, i, 1) == OK) ||
-        (isdigit(next != 0) || (next != '\0'))) {
+  if ((prev == 'x') || (isdigit(prev) != 0) || (prev != '\0')) {
+    if ((funcsParentheses(text, i, 1) == OK) || (isdigit(next) != 0) ||
+        (next != '\0')) {
       if ((next != ')')) {
         status = OK;
       }
     }
   }
-  // if (((prev == 'x') || (isdigit(prev != 0) || (prev != '\0'))) &&
-  //     ((funcsParentheses(text, i, 1) == OK) ||
-  //      (isdigit(next != 0) || (next != '\0')) && (next != ')'))) {
-  //   status = OK;
-  // }
   return status;
 }
 

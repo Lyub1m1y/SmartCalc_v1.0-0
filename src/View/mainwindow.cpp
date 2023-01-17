@@ -12,8 +12,7 @@ void MainWindow::on_Button_res_clicked() {
   QByteArray ba_x = needle.toLocal8Bit();
   char *haystack_ch = ba_x.data();
   if ((*haystack_ch) != '\0') {
-    int mod = 0;
-    if (isNumber(haystack_ch, &mod) == OK) {
+    if (isNumber(haystack_ch) == OK) {
       temp_text = replaceVarX(temp_text, needle);
     } else {
       QMessageBox::critical(this, "Invalid expression",
@@ -65,7 +64,7 @@ int checkOperation(QString text) {
 }
 
 void MainWindow::on_Help_clicked() {
-  QDesktopServices::openUrl(QUrl("help/index.html", QUrl::TolerantMode));
+  QDesktopServices::openUrl(QUrl("Help/index.html", QUrl::TolerantMode));
 }
 
 void MainWindow::on_Button_del_clicked() { ui->OutputLabel->setText("0"); }
