@@ -85,9 +85,3 @@ check:
 	@cp ../materials/linters/CPPLINT.cfg .
 	python3 ../materials/linters/cpplint.py --extensions=c **/*.c
 	clang-format -style=Google -n **/*.c
-	# @make leaks
-
-# leaks:
-# 	@echo -------------------MEMORY_TEST-------------------
-# 	$(CC) -g $(TEST) $(SRC) $(FLAGS_PLATFORM) -o leaks
-# 	CK_FORK=no leaks --atExit -- ./leaks

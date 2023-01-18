@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef SRC_MODEL_MAINWINDOW_H_
+#define SRC_MODEL_MAINWINDOW_H_
 
 #include <QDebug>
 #include <QDesktopServices>
@@ -15,6 +15,8 @@
 extern "C" {
 #include "../Model/smartcalc.h"
 }
+
+#define MONTH 30.4166667
 
 QString replaceVarX(QString str1, QString str2);
 
@@ -102,10 +104,12 @@ class MainWindow : public QMainWindow {
 
   void on_Button_Grath_clicked();
 
+  void on_count_credit_clicked();
+
  private:
   Ui::MainWindow *ui;
   double xBegin, xEnd, h, X = 0.0;
   int N;
   QVector<double> x, y;
 };
-#endif  // MAINWINDOW_H
+#endif  // SRC_MODEL_MAINWINDOW_H_

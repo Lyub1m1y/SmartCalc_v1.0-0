@@ -1,5 +1,5 @@
-#ifndef SRC_SMARTCALC_H_
-#define SRC_SMARTCALC_H_
+#ifndef SRC_MODEL_SMARTCALC_H_
+#define SRC_MODEL_SMARTCALC_H_
 
 #include <ctype.h>
 #include <math.h>
@@ -81,4 +81,4 @@ int stack_peekType_(stack_t* list);
 void delStack(stack_t** result, stack_t* tmp);
 stack_t* stack_free_(stack_t* list);
 
-#endif  // SRC_SMARTCALC_H_
+#endif  // SRC_MODEL_SMARTCALC_H_

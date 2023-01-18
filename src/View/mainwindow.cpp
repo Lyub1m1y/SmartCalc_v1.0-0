@@ -420,3 +420,70 @@ void MainWindow::on_Button_Grath_clicked() {
   x.clear();
   y.clear();
 }
+
+void MainWindow::on_count_credit_clicked() {
+  QString temp_text_1 = ui->edit_sum_credit->text();
+  QString temp_text_2 = ui->edit_term_credit->text();
+  QString temp_text_3 = ui->edit_interest_rate->text();
+  QByteArray ba_1 = temp_text_1.toLocal8Bit();
+  QByteArray ba_2 = temp_text_2.toLocal8Bit();
+  QByteArray ba_3 = temp_text_3.toLocal8Bit();
+  char *text_1 = ba_1.data();
+  char *text_2 = ba_2.data();
+  char *text_3 = ba_3.data();
+
+  int status_valid = FAIL;
+  if (((*text_1) != '\0') && ((*text_2) != '\0') && ((*text_3) != '\0')) {
+    if ((isNumber(text_1) == OK) && (isNumber(text_2) == OK) &&
+        (isNumber(text_3) == OK)) {
+      status_valid = OK;
+    } else {
+      QMessageBox::critical(this, "Invalid expression", "Invalid input");
+    }
+  }
+
+  if (status_valid == OK) {
+    if ((ui->radioButton_diff->isChecked()) ||
+        (ui->radioButton_ann->isChecked())) {
+      double term = ui->edit_term_credit->text().toDouble();
+      double payment = 0, total_pay = 0;
+      double sum_credit = ui->edit_sum_credit->text().toDouble();
+      double sum_interest = sum_credit;
+      QString str_first_month_pay;
+
+      for (int i = 1; i <= term; i++) {
+        double interes_rate = ui->edit_interest_rate->text().toDouble();
+        QString month_pay;
+        if (ui->radioButton_diff->isChecked()) {
+          QString varMonth = QString::number(i);
+          payment = sum_credit / term +
+                    sum_interest * interes_rate * MONTH / 365 / 100;
+          total_pay += payment;
+          sum_interest = sum_credit - i * sum_credit / term;
+          month_pay = QString::number(payment, 'f', 2);
+          if (i == 1) {
+            str_first_month_pay = month_pay;
+          }
+          month_pay = str_first_month_pay + "..." + month_pay;
+        } else if (ui->radioButton_ann->isChecked()) {
+          i = term;
+          double prStavka = interes_rate / 12 / 100;
+          payment = sum_credit * (prStavka * pow(1 + prStavka, term) /
+                                  (pow(1 + prStavka, term) - 1));
+          total_pay = payment * term;
+          month_pay = QString::number(payment, 'f', 2);
+        }
+        ui->output_mounthly_payment_credit->setText(month_pay);
+      }
+      double overpayment = total_pay - sum_credit;
+      QString str_total_pay = QString::number(total_pay, 'f', 2);
+      QString str_overpayment = QString::number(overpayment, 'f', 2);
+
+      ui->output_total_payout_credit->setText(str_total_pay);
+      ui->output_overpayment_credit->setText(str_overpayment);
+    } else {
+      QMessageBox::critical(this, "Invalid expression",
+                            "Please select the type (annuity/differentiated)");
+    }
+  }
+}

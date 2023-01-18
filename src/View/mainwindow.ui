@@ -1164,9 +1164,9 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>350</y>
+        <y>340</y>
         <width>281</width>
-        <height>171</height>
+        <height>181</height>
        </rect>
       </property>
      </widget>
@@ -1287,6 +1287,19 @@ QPushButton:pressed {
        </item>
       </layout>
      </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>27</x>
+        <y>336</y>
+        <width>421</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="credit">
      <attribute name="title">
@@ -1298,17 +1311,28 @@ QPushButton:pressed {
         <x>30</x>
         <y>20</y>
         <width>411</width>
-        <height>263</height>
+        <height>211</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_term_credit_2">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_sum_credit">
          <property name="text">
-          <string>Срок кредита:</string>
+          <string>Сумма кредита:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QRadioButton" name="radioButton_diff">
+         <property name="text">
+          <string>Дифференцированный</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" rowspan="2">
+        <widget class="QLabel" name="label_type_payments">
+         <property name="text">
+          <string>Тип ежемесячных платежей: </string>
          </property>
         </widget>
        </item>
@@ -1337,60 +1361,31 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="3" column="0" rowspan="2">
-        <widget class="QLabel" name="label_type_payments_2">
-         <property name="text">
-          <string>Тип ежемесячных платежей: </string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="edit_sum_credit">
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	font: 22pt &quot;Helvetica&quot;;
-	background-color: rgb(60,60,60);
-	color: white;
-	border: 1px solid black;
-	padding: 5px;
-}</string>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_term_credit">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
          <property name="text">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
+          <string>Срок кредита (мес.):</string>
          </property>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="label_sum_credit_2">
+        <widget class="QLabel" name="label_interest_rate">
          <property name="text">
-          <string>Сумма кредита:</string>
+          <string>Процентная ставка (%): </string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="5" column="1">
         <widget class="QRadioButton" name="radioButton_ann">
          <property name="text">
           <string>Аннуитетный</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_interest_rate_2">
-         <property name="text">
-          <string>Процентная ставка:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
+       <item row="0" column="1">
         <widget class="QLineEdit" name="edit_term_credit">
          <property name="styleSheet">
           <string notr="true">QLineEdit {
@@ -1415,34 +1410,8 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QRadioButton" name="radioButton_diff">
-         <property name="text">
-          <string>Дифференцированный</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="gridLayoutWidget_6">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>310</y>
-        <width>411</width>
-        <height>202</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_overpayment_credit">
-         <property name="text">
-          <string>Переплата по кредиту:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="edit_overpayment_credit">
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="edit_sum_credit">
          <property name="styleSheet">
           <string notr="true">QLineEdit {
 	font: 22pt &quot;Helvetica&quot;;
@@ -1466,14 +1435,33 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_total_payout__credit_3">
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>320</y>
+        <width>411</width>
+        <height>174</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_total_payout_credit">
          <property name="text">
           <string>Общая выплата:</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_overpayment_credit">
+         <property name="text">
+          <string>Переплата по кредиту:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
         <widget class="QLabel" name="label_mounthly_payment_credit">
          <property name="enabled">
           <bool>true</bool>
@@ -1484,56 +1472,106 @@ QPushButton:pressed {
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="edit_total_payout__credit_3">
+        <widget class="QLabel" name="output_mounthly_payment_credit">
+         <property name="font">
+          <font>
+           <family>Helvetica</family>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	font: 22pt &quot;Helvetica&quot;;
-	background-color: rgb(60,60,60);
-	color: white;
-	border: 1px solid black;
-	padding: 5px;
-}</string>
+          <string notr="true">QLabel {
+            font: 14pt &quot;Helvetica&quot;;
+	        background-color: rgb(60,60,60);
+            color: white;
+            border: 1px solid black;
+            padding: 5px;
+            }</string>
          </property>
          <property name="text">
           <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="edit_mounthly_payment_credit">
+       <item row="3" column="1">
+        <widget class="QLabel" name="output_overpayment_credit">
          <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	font: 22pt &quot;Helvetica&quot;;
-	background-color: rgb(60,60,60);
-	color: white;
-	border: 1px solid black;
-	padding: 5px;
-}</string>
+          <string notr="true">QLabel {
+            font: 14pt &quot;Helvetica&quot;;
+	        background-color: rgb(60,60,60);
+            color: white;
+            border: 1px solid black;
+            padding: 5px;
+            }</string>
          </property>
          <property name="text">
           <string/>
          </property>
-         <property name="maxLength">
-          <number>32767</number>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="output_total_payout_credit">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+            font: 14pt &quot;Helvetica&quot;;
+	        background-color: rgb(60,60,60);
+            color: white;
+            border: 1px solid black;
+            padding: 5px;
+            }</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="geometry">
+       <rect>
+        <x>37</x>
+        <y>286</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="count_credit">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>240</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+  background-color: rgb(255, 151, 57);
+  color: white; 
+  border: 1px solid gray;
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #FF7832, stop: 1 #FF9739);
+}</string>
+      </property>
+      <property name="text">
+       <string>COUNT</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="deposit">
