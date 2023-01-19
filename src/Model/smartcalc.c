@@ -386,7 +386,7 @@ int isSign(char* text, int* i, int* dotCount) {
     }
   }
   if (symb == '-') {
-    if (checkCorrectOperator(text, i) == 0) {
+    if ((checkCorrectOperator(text, i) == 0) || ((*i) == 0)) {
       status = OK;
       (*dotCount) = 0;
     }

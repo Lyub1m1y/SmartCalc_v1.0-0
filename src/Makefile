@@ -51,6 +51,7 @@ clean:
 	@rm -rf build-SmartCalc_v1-0-0-Desktop-Release/
 	@rm -rf test
 	@rm -rf leaks
+	@rm -rf Model/smartcalc
 
 dvi:
 	open ./Help/index.html

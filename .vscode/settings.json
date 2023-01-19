@@ -8,6 +8,7 @@
     "utility": "cpp",
     "sstream": "cpp",
     "functional": "c",
-    "string": "cpp"
+    "string": "cpp",
+    "smartcalc.h": "c"
   }
 }
