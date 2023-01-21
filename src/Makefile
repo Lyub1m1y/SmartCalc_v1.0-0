@@ -1,4 +1,4 @@
-.PHONY: all, install, uninstall, clean, dvi, dist, tests, gcov_report, check, leaks
+.PHONY: all install uninstall clean dvi dist test gcov_report check
 
 OS := $(shell uname -s)
 SRC =  Model/smartcalc.c
@@ -28,11 +28,16 @@ all: install open
 
 install:
 	@make clean
-	@cd View && qmake6 && make && make clean && rm Makefile && mv SmartCalc_v1-0-0 ../
+ifeq ($(OS), Darwin)
+	@cd View && qmake6 && make && make clean && rm Makefile && mv SmartCalc_v1-0-0.app/Contents/MacOS/SmartCalc_v1-0-0 ../
+else
+	@cd View && qmake6 && make && make clean && rm Makefile && mv SmartCalc_v1-0-0. ../
+endif
 
 uninstall:
 	@rm -rf SmartCalc_v1-0-0
 
+	
 clean:
 	@rm -rf *.{a,dSYM,out}
 	@rm -rf **/**.o **.o
@@ -43,15 +48,16 @@ clean:
 	@rm -rf *.gcda
 	@rm -rf *.gcno
 	@rm -rf *.info
-	@rm -rf test
+	@rm -rf test.out
 	@rm -rf *tgz
 	@rm -rf gcov_test
 	@rm -rf .clang-format
 	@rm -rf ../Archive_SmartCalc_v1.0.*
 	@rm -rf build-SmartCalc_v1-0-0-Desktop-Release/
-	@rm -rf test
-	@rm -rf leaks
+	@rm -rf build-SmartCalc_v1-0-0-Desktop_x86_darwin_generic_mach_o_64bit-Debug
 	@rm -rf Model/smartcalc
+	@rm -rf View/SmartCalc_v1-0-0.app
+	@rm -rf GcovReport
 
 dvi:
 	open ./Help/index.html
@@ -64,8 +70,8 @@ dist:
 	cd ../ && tar -cvzf Archive_SmartCalc_v1.0.tar.gz Archive_SmartCalc_v1.0
 
 test:
-	@$(CC) $(CFLAGS) $(TEST) $(SRC_FOR_TEST) $(FLAGS_PLATFORM) -o test
-	@./test
+	@$(CC) $(CFLAGS) $(TEST) $(SRC_FOR_TEST) $(FLAGS_PLATFORM) -o test.out
+	@./test.out
 
 gcov_report:
 	gcc $(GCOVFLAGS) $(TEST) $(SRC) $(FLAGS_PLATFORM) -o $(REPORT)

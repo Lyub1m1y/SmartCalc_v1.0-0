@@ -80,7 +80,7 @@ END_TEST
 
 START_TEST(test_smart_calc_9) {
   double x_value = 3.3;
-  stack_t *reverseTokens = NULL;
+  stack_tt *reverseTokens = NULL;
   char input[255] =
       "(+3-log(2))-(-ln(3))^23mod1+cos(87)-x)*tan(sin(sqrt(asin(acos("
       "atan(30/"
@@ -93,9 +93,9 @@ END_TEST
 
 START_TEST(test_smart_calc_10) {
   double x_value = 3.3;
-  stack_t *reverseTokens = NULL;
-  stack_t *tokens = NULL;
-  stack_t *reverseOutput = NULL;
+  stack_tt *reverseTokens = NULL;
+  stack_tt *tokens = NULL;
+  stack_tt *reverseOutput = NULL;
   char input[255] = "2mod4-(2+cos(3))";
   parser(input, &reverseTokens, x_value);
   stack_reverse_(&tokens, &reverseTokens);
@@ -112,10 +112,10 @@ START_TEST(test_smart_calc_11) {
   double x_value = 3.3;
   char input[255] =
       "x+ln(-3-log(+4/sqrt(5*sin(cos(3mod5^tan(asin(acos(atan(100)))))))))";
-  stack_t *reverseTokens = NULL;
-  stack_t *tokens = NULL;
-  stack_t *reverseOutput = NULL;
-  stack_t *output = NULL;
+  stack_tt *reverseTokens = NULL;
+  stack_tt *tokens = NULL;
+  stack_tt *reverseOutput = NULL;
+  stack_tt *output = NULL;
   parser(input, &reverseTokens, x_value);
   stack_reverse_(&tokens, &reverseTokens);
 

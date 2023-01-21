@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>492</width>
-    <height>638</height>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,7 +39,7 @@
      <bool>false</bool>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="simple">
      <attribute name="title">
@@ -110,7 +110,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -171,7 +170,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -264,7 +262,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -297,7 +294,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -388,7 +384,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -421,7 +416,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -545,7 +539,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -636,7 +629,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -698,7 +690,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -824,7 +815,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -857,7 +847,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -896,7 +885,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -929,7 +917,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -962,7 +949,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -1004,7 +990,6 @@ QPushButton:pressed {
           <font>
            <family>Arial</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -1075,7 +1060,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -1137,7 +1121,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>22</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -1163,10 +1146,10 @@ QPushButton:pressed {
      <widget class="QCustomPlot" name="widget" native="true">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>340</y>
-        <width>281</width>
-        <height>181</height>
+        <x>10</x>
+        <y>400</y>
+        <width>261</width>
+        <height>211</height>
        </rect>
       </property>
      </widget>
@@ -1174,7 +1157,7 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>480</y>
+        <y>570</y>
         <width>181</width>
         <height>41</height>
        </rect>
@@ -1189,7 +1172,6 @@ QPushButton:pressed {
        <font>
         <family>Helvetica</family>
         <pointsize>22</pointsize>
-        <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
        </font>
@@ -1213,9 +1195,9 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>350</y>
+        <y>400</y>
         <width>181</width>
-        <height>131</height>
+        <height>161</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -1291,7 +1273,7 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>27</x>
-        <y>336</y>
+        <y>360</y>
         <width>421</width>
         <height>20</height>
        </rect>
@@ -1311,7 +1293,7 @@ QPushButton:pressed {
         <x>30</x>
         <y>20</y>
         <width>411</width>
-        <height>211</height>
+        <height>291</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
@@ -1441,7 +1423,7 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>320</y>
+        <y>410</y>
         <width>411</width>
         <height>174</height>
        </rect>
@@ -1477,7 +1459,6 @@ QPushButton:pressed {
           <font>
            <family>Helvetica</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -1534,7 +1515,7 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>37</x>
-        <y>286</y>
+        <y>380</y>
         <width>391</width>
         <height>20</height>
        </rect>
@@ -1547,7 +1528,7 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>140</x>
-        <y>240</y>
+        <y>330</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -1584,7 +1565,7 @@ QPushButton:pressed {
         <x>30</x>
         <y>10</y>
         <width>421</width>
-        <height>361</height>
+        <height>460</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_5" columnstretch="0,0,0">
@@ -1600,44 +1581,6 @@ QPushButton:pressed {
        <property name="horizontalSpacing">
         <number>6</number>
        </property>
-       <item row="12" column="2">
-        <widget class="QLineEdit" name="edit_once_month_pop">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>31</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	font: 22pt &quot;Helvetica&quot;;
-	background-color: rgb(60,60,60);
-	color: white;
-	border: 1px solid black;
-	padding: 5px;
-}</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_periodicity">
-         <property name="text">
-          <string>Переодичность выплат (мес.):</string>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_term_deposit">
          <property name="text">
@@ -1645,28 +1588,8 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="8" column="0">
-        <widget class="QLabel" name="label_sum_add">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Cумма:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="0">
-        <widget class="QLabel" name="label_once_month_pop">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Раз (в мес.):</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLineEdit" name="edit_term_deposit">
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="edit_interest_rate_deposit">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -1709,8 +1632,8 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="11" column="2">
-        <widget class="QLineEdit" name="edit_sum_pop">
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="edit_sum_deposit">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -1740,35 +1663,18 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_sum_deposit">
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_once_month_add">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Cумма вклада:</string>
+          <string>Раз (в мес.):</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="0">
-        <widget class="QLabel" name="label_sum_pop">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Cумма:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_tax_rate">
-         <property name="text">
-          <string>Налоговая ставка (%):</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="2">
-        <widget class="QLineEdit" name="edit_once_month_add">
+       <item row="12" column="2">
+        <widget class="QLineEdit" name="edit_once_month_pop">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -1811,8 +1717,186 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="edit_term_deposit">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_sum_pop">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Cумма:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_sum_add">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Cумма:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_sum_deposit">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Cумма вклада:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="label_once_month_pop">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Раз (в мес.):</string>
+         </property>
+        </widget>
+       </item>
        <item row="5" column="2">
         <widget class="QLineEdit" name="edit_tax_rate">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_periodicity">
+         <property name="text">
+          <string>Переодичность выплат (мес.):</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2">
+        <widget class="QLineEdit" name="edit_once_month_add">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_interest_rate_deposit">
+         <property name="text">
+          <string>Процентная ставка (%): </string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <widget class="QLineEdit" name="edit_sum_add">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	font: 22pt &quot;Helvetica&quot;;
+	background-color: rgb(60,60,60);
+	color: white;
+	border: 1px solid black;
+	padding: 5px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="2">
+        <widget class="QLineEdit" name="edit_sum_pop">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -1873,137 +1957,52 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_interest_rate_deposit">
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_tax_rate">
          <property name="text">
-          <string>Процентная ставка (%): </string>
+          <string>Налоговая ставка (%):</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QLineEdit" name="edit_interest_rate_deposit">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>31</height>
-          </size>
+       <item row="13" column="2">
+        <widget class="QPushButton" name="count_deposit">
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	font: 22pt &quot;Helvetica&quot;;
-	background-color: rgb(60,60,60);
-	color: white;
-	border: 1px solid black;
-	padding: 5px;
+          <string notr="true">QPushButton {
+  background-color: rgb(255, 151, 57);
+  color: white; 
+  border: 1px solid gray;
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #FF7832, stop: 1 #FF9739);
 }</string>
          </property>
          <property name="text">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
+          <string>COUNT</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="2">
-        <widget class="QLineEdit" name="edit_sum_add">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>31</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	font: 22pt &quot;Helvetica&quot;;
-	background-color: rgb(60,60,60);
-	color: white;
-	border: 1px solid black;
-	padding: 5px;
-}</string>
-         </property>
+       <item row="13" column="0">
+        <widget class="QCheckBox" name="checkBox_capitalization">
          <property name="text">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLineEdit" name="edit_sum_deposit">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>31</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	font: 22pt &quot;Helvetica&quot;;
-	background-color: rgb(60,60,60);
-	color: white;
-	border: 1px solid black;
-	padding: 5px;
-}</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0">
-        <widget class="QLabel" name="label_once_month_add">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Раз (в мес.):</string>
+          <string>Капитализация %</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QCheckBox" name="checkBox_capitalization">
-      <property name="geometry">
-       <rect>
-        <x>55</x>
-        <y>382</y>
-        <width>171</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Капитализация %</string>
-      </property>
-     </widget>
      <widget class="Line" name="line_3">
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>410</y>
-        <width>391</width>
+        <y>470</y>
+        <width>401</width>
         <height>20</height>
        </rect>
       </property>
@@ -2015,47 +2014,14 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>430</y>
+        <y>490</y>
         <width>421</width>
-        <height>101</height>
+        <height>124</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_6">
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_sum_interest">
-         <property name="text">
-          <string>Сумма с %:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_sum_tax">
-         <property name="text">
-          <string>Сумма налога:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_accrued_interest">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Начисленные проценты:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="output_accrued_interest">
-         <property name="font">
-          <font>
-           <family>Helvetica</family>
-           <pointsize>14</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
+       <item row="3" column="1">
+        <widget class="QLabel" name="output_sum_tax">
          <property name="styleSheet">
           <string notr="true">QLabel {
             font: 14pt &quot;Helvetica&quot;;
@@ -2070,8 +2036,16 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="output_sum_tax">
+       <item row="2" column="1">
+        <widget class="QLabel" name="output_accrued_interest">
+         <property name="font">
+          <font>
+           <family>Helvetica</family>
+           <pointsize>14</pointsize>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">QLabel {
             font: 14pt &quot;Helvetica&quot;;
@@ -2102,37 +2076,31 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_sum_tax">
+         <property name="text">
+          <string>Сумма налога:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_sum_interest">
+         <property name="text">
+          <string>Сумма с %:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_accrued_interest">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Начисленные проценты:</string>
+         </property>
+        </widget>
+       </item>
       </layout>
-     </widget>
-     <widget class="QPushButton" name="count_deposit">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>380</y>
-        <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-  background-color: rgb(255, 151, 57);
-  color: white; 
-  border: 1px solid gray;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #FF7832, stop: 1 #FF9739);
-}</string>
-      </property>
-      <property name="text">
-       <string>COUNT</string>
-      </property>
      </widget>
     </widget>
    </widget>
@@ -2140,7 +2108,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>568</y>
+      <y>650</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -2156,7 +2124,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>492</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

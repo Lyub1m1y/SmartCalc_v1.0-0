@@ -3,14 +3,14 @@
 int entryPoint(char* text, double* double_result, double x_value) {
   int status = OK;
   if (validator(text) == OK) {
-    stack_t* reverseTokens = NULL;
+    stack_tt* reverseTokens = NULL;
     parser(text, &reverseTokens, x_value);
-    stack_t* tokens = NULL;
+    stack_tt* tokens = NULL;
     stack_reverse_(&tokens, &reverseTokens);
 
-    stack_t* reverseOutput = NULL;
+    stack_tt* reverseOutput = NULL;
     reversePolishNotation(tokens, &reverseOutput);
-    stack_t* output = NULL;
+    stack_tt* output = NULL;
     stack_reverse_(&output, &reverseOutput);
 
     calculate(&output);
@@ -49,7 +49,7 @@ int validator(char* text) {
   return status;
 }
 
-void parser(char* text, stack_t** reverseTokens, double x_value) {
+void parser(char* text, stack_tt** reverseTokens, double x_value) {
   int text_length = strlen(text);
   for (int i = 0; i < text_length; i++) {
     if (isdigit(text[i]) != 0) {
@@ -128,8 +128,8 @@ void parser(char* text, stack_t** reverseTokens, double x_value) {
   }
 }
 
-void reversePolishNotation(stack_t* stack, stack_t** numStack) {
-  stack_t* supportStack = {0};
+void reversePolishNotation(stack_tt* stack, stack_tt** numStack) {
+  stack_tt* supportStack = {0};
   while (stack) {
     if (stack_peekType_(stack) != CLOSEBRACKET) {
       if (stack_peekType_(stack) == NUMBER) {
@@ -166,9 +166,9 @@ void reversePolishNotation(stack_t* stack, stack_t** numStack) {
   }
 }
 
-void calculate(stack_t** stack) {
+void calculate(stack_tt** stack) {
   while ((*stack)->next != NULL) {
-    stack_t *tmp_1 = {0}, *tmp_2 = {0}, *tmp_3 = {0};
+    stack_tt *tmp_1 = {0}, *tmp_2 = {0}, *tmp_3 = {0};
     tmp_1 = *stack;
     tmp_2 = tmp_1->next;
     if (tmp_2->next != NULL) {
@@ -191,8 +191,8 @@ void calculate(stack_t** stack) {
   }
 }
 
-void calcLexems(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2,
-                stack_t* tmp_3) {
+void calcLexems(stack_tt** stack, stack_tt* tmp_1, stack_tt* tmp_2,
+                stack_tt* tmp_3) {
   double numStack = 0;
   double a = tmp_1->value;
   double b = tmp_2->value;
@@ -216,7 +216,7 @@ void calcLexems(stack_t** stack, stack_t* tmp_1, stack_t* tmp_2,
   delStack(stack, tmp_2);
 }
 
-void calcFuncs(stack_t** stack, stack_t* tmp_2, stack_t* tmp_3) {
+void calcFuncs(stack_tt** stack, stack_tt* tmp_2, stack_tt* tmp_3) {
   double a = 0;
   double numStack = 0;
   a = tmp_2->value;
@@ -249,8 +249,8 @@ void calcFuncs(stack_t** stack, stack_t* tmp_2, stack_t* tmp_3) {
   delStack(stack, tmp_3);
 }
 
-void delStack(stack_t** result, stack_t* tmp) {
-  stack_t* tmp_in_function = {0};
+void delStack(stack_tt** result, stack_tt* tmp) {
+  stack_tt* tmp_in_function = {0};
   tmp_in_function = *result;
   if (*result == tmp) {
     tmp_in_function = (*result)->next;
@@ -464,8 +464,8 @@ int checkRatioBrackets(char* text, int text_length) {
   return status;
 }
 
-void stack_push_(double value, int priority, type_t type, stack_t** stack) {
-  stack_t* new = malloc(sizeof(stack_t));
+void stack_push_(double value, int priority, type_t type, stack_tt** stack) {
+  stack_tt* new = malloc(sizeof(stack_tt));
   if (new != NULL) {
     new->value = value;
     new->priority = priority;
@@ -475,15 +475,15 @@ void stack_push_(double value, int priority, type_t type, stack_t** stack) {
   }
 }
 
-void stack_pop_(stack_t** last) {
+void stack_pop_(stack_tt** last) {
   if (*last != NULL) {
-    stack_t* tmp = (*last)->next;
+    stack_tt* tmp = (*last)->next;
     free(*last);
     *last = tmp;
   }
 }
 
-void stack_reverse_(stack_t** stack, stack_t** reverse_stack) {
+void stack_reverse_(stack_tt** stack, stack_tt** reverse_stack) {
   while (*reverse_stack) {
     stack_push_((*reverse_stack)->value, (*reverse_stack)->priority,
                 (*reverse_stack)->type, stack);
@@ -491,9 +491,9 @@ void stack_reverse_(stack_t** stack, stack_t** reverse_stack) {
   }
 }
 
-int stack_peekType_(stack_t* stack) { return stack->type; }
+int stack_peekType_(stack_tt* stack) { return stack->type; }
 
-int checkSupport(stack_t* helpStack, int priority) {
+int checkSupport(stack_tt* helpStack, int priority) {
   int numStack = 0;
   if (helpStack != NULL) {
     if (priority > helpStack->priority) {
@@ -505,9 +505,9 @@ int checkSupport(stack_t* helpStack, int priority) {
   return numStack;
 }
 
-stack_t* stack_free_(stack_t* list) {
+stack_tt* stack_free_(stack_tt* list) {
   while (list != NULL) {
-    stack_t* temporary = list;
+    stack_tt* temporary = list;
     list = list->next;
     free(temporary);
   }
