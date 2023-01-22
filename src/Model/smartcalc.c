@@ -1,13 +1,5 @@
 #include "smartcalc.h"
 
-// debug
-// int main() {
-//   double double_result = 0.0;
-//   char text[] = "1^2^3^4^5^6";
-//   int status = entryPoint(text, &double_result, 10);
-//   return 0;
-// }
-
 int entryPoint(char* text, double* double_result, double x_value) {
   int status = OK;
   if (validator(text) == OK) {

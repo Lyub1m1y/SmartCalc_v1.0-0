@@ -487,8 +487,194 @@ void MainWindow::on_count_credit_clicked() {
   }
 }
 
-void MainWindow::on_count_deposit_clicked()
-{
-
+void MainWindow::on_lineEdit_dep_editingFinished() {
+  ui->edit_sum_deposit->setValidator(new QIntValidator(0, 2000000000, this));
+  ui->edit_term_deposit->setValidator(new QIntValidator(0, 2000000000, this));
+  ui->edit_interest_rate_deposit->setValidator(
+      new QDoubleValidator(0, 0, 5, this));
+  ui->edit_key_rate_deposit->setValidator(new QDoubleValidator(0, 0, 5, this));
+  ui->edit_tax_rate->setValidator(new QDoubleValidator(0, 0, 5, this));
+  ui->lineEdit_replenish->setValidator(new QDoubleValidator(0, 0, 5, this));
 }
 
+void MainWindow::on_pushButton_2_clicked() {
+  ui->edit_sum_deposit->clear();
+  ui->edit_term_deposit->clear();
+  ui->edit_interest_rate_deposit->clear();
+  ui->edit_key_rate_deposit->clear();
+  ui->edit_tax_rate->clear();
+  ui->output_sum_interest->clear();
+  ui->output_accrued_interest->clear();
+  ui->output_sum_tax->clear();
+  ui->lineEdit_replenish->clear();
+}
+
+void MainWindow::on_pushButton_clicked() {
+  deposit_t newDeposit;
+  newDeposit.money = ui->edit_sum_deposit->text().toInt();
+  newDeposit.period = ui->edit_term_deposit->text().toInt();
+  newDeposit.capitalisation = ui->box_capitalisation->currentText();
+  newDeposit.payout = ui->box_payout->currentText();
+  newDeposit.replenishment = ui->box_replenishment->currentText();
+  if (ui->lineEdit_replenish->isVisible()) {
+  }
+
+  newDeposit.percent = 0;
+  newDeposit.deposit = newDeposit.money;
+  newDeposit.tax = 0;
+
+  if (newDeposit.capitalisation == "Нет") {
+    no_capitalisation(&newDeposit);
+  } else {
+    capitalisation(&newDeposit);
+  }
+
+  ui->output_sum_interest->setText(QString::number(newDeposit.deposit));
+  ui->output_accrued_interest->setText(QString::number(newDeposit.percent));
+  ui->output_sum_tax->setText(QString::number(newDeposit.tax));
+}
+
+void MainWindow::capitalisation(deposit_t *dep) {
+  int capFrequency = combo_box_pars(dep->capitalisation);
+
+  int addFrequency = 0;
+  if (dep->replenishment != "Нет") {
+    addFrequency = combo_box_pars(dep->replenishment);
+  }
+  for (int i = capFrequency; i <= dep->period; i += capFrequency) {
+    if (dep->replenishment != "Нет" && i >= addFrequency) {
+      dep->deposit += dep->replenish;
+    }
+    dep->deposit += procent_calc(dep->deposit, dep->rate, capFrequency);
+  }
+  dep->percent = dep->deposit - dep->money;
+}
+
+void MainWindow::no_capitalisation(deposit_t *dep) {
+  dep->percent = procent_calc(dep->money, dep->rate, dep->period);
+  dep->deposit = dep->money + dep->percent;
+  if (dep->replenishment != "Нет") {
+    replenish_calc_noCap(dep);
+  }
+  if (dep->rate > dep->key_rate) {
+    tax_calculate(dep);
+  }
+}
+
+void MainWindow::tax_calculate(deposit_t *dep) {
+  double tax_dif = 0;
+  tax_dif = procent_calc(dep->money, dep->key_rate, dep->period);
+  dep->tax = dep->tax_kind / 100.0 * (dep->percent - tax_dif);
+  dep->percent -= dep->tax;
+  dep->deposit -= dep->tax;
+}
+
+void MainWindow::replenish_calc_noCap(deposit_t *dep) {
+  int addFrequency = combo_box_pars(dep->replenishment);
+  ;
+  double added_percent = 0;
+  int dop_invest = 0;
+  for (int i = addFrequency; i < dep->period; i += addFrequency) {
+    dop_invest += dep->replenish;
+    added_percent += procent_calc(dep->replenish, dep->rate, i);
+  }
+  dep->percent += added_percent;
+  dep->deposit += added_percent + dop_invest;
+}
+
+double MainWindow::procent_calc(int money, double rate, int period) {
+  return money * rate / 100.0 * period * MONTH / 365;
+}
+
+QString ChToDot(QString str) {
+  for (int i = 0; i < str.length(); i++) {
+    if (str[i] == ',') {
+      str[i] = '.';
+    }
+  }
+  return str;
+}
+
+int MainWindow::combo_box_pars(QString str) {
+  int value = 0;
+  if (str == "Ежемесячно") {
+    value = 1;
+  } else if (str == "6 месяцев") {
+    value = 6;
+  } else if (str == "1 год") {
+    value = 12;
+  }
+  return value;
+}
+
+void MainWindow::on_box_replenishment_currentTextChanged(const QString &arg1) {
+  if (arg1 == "Нет") {
+    ui->lineEdit_replenish->hide();
+  } else {
+    ui->lineEdit_replenish->show();
+  }
+}
+
+void MainWindow::on_count_deposit_clicked() {
+  QString temp_text_1 = ui->edit_sum_deposit->text();
+  QString temp_text_2 = ui->edit_term_deposit->text();
+  QString temp_text_3 = ui->edit_interest_rate_deposit->text();
+  QString temp_text_4 = ui->edit_key_rate_deposit->text();
+  QString temp_text_5 = ui->edit_tax_rate->text();
+  QString temp_text_6 = ui->lineEdit_replenish->text();
+
+  QByteArray ba_1 = temp_text_1.toLocal8Bit();
+  QByteArray ba_2 = temp_text_2.toLocal8Bit();
+  QByteArray ba_3 = temp_text_3.toLocal8Bit();
+  QByteArray ba_4 = temp_text_4.toLocal8Bit();
+  QByteArray ba_5 = temp_text_5.toLocal8Bit();
+  QByteArray ba_6 = temp_text_6.toLocal8Bit();
+  char *text_1 = ba_1.data();
+  char *text_2 = ba_2.data();
+  char *text_3 = ba_3.data();
+  char *text_4 = ba_4.data();
+  char *text_5 = ba_5.data();
+  char *text_6 = ba_6.data();
+
+  int status_valid = FAIL;
+  if (((*text_1) != '\0') && ((*text_2) != '\0') && ((*text_3) != '\0') &&
+      ((*text_4) != '\0') && ((*text_5) != '\0') && ((*text_6) != '\0')) {
+    if ((isNumber(text_1) == OK) && (isNumber(text_2) == OK) &&
+        (isNumber(text_3) == OK) && (isNumber(text_4) == OK) &&
+        (isNumber(text_5) == OK) && (isNumber(text_6) == OK)) {
+      status_valid = OK;
+    } else {
+      QMessageBox::critical(this, "Invalid expression", "Invalid input");
+    }
+  }
+
+  if (status_valid == OK) {
+    deposit_t newDeposit;
+    newDeposit.money = ui->edit_sum_deposit->text().toInt();
+    newDeposit.period = ui->edit_term_deposit->text().toInt();
+    newDeposit.rate =
+        ChToDot(ui->edit_interest_rate_deposit->text()).toDouble();
+    newDeposit.key_rate = ChToDot(ui->edit_key_rate_deposit->text()).toDouble();
+    newDeposit.capitalisation = ui->box_capitalisation->currentText();
+    newDeposit.payout = ui->box_payout->currentText();
+    newDeposit.replenishment = ui->box_replenishment->currentText();
+    newDeposit.tax_kind = ChToDot(ui->edit_tax_rate->text()).toDouble();
+    if (ui->lineEdit_replenish->isVisible()) {
+      newDeposit.replenish = ChToDot(ui->lineEdit_replenish->text()).toDouble();
+    }
+
+    newDeposit.percent = 0;
+    newDeposit.deposit = newDeposit.money;
+    newDeposit.tax = 0;
+
+    if (newDeposit.capitalisation == "Нет") {
+      no_capitalisation(&newDeposit);
+    } else {
+      capitalisation(&newDeposit);
+    }
+
+    ui->output_accrued_interest->setText(QString::number(newDeposit.percent));
+    ui->output_sum_tax->setText(QString::number(newDeposit.tax));
+    ui->output_sum_interest->setText(QString::number(newDeposit.deposit));
+  }
+}

@@ -20,6 +20,15 @@ extern "C" {
 
 QString replaceVarX(QString str1, QString str2);
 
+typedef struct deposit_t {
+  long long int money;
+  int period;
+  double rate, key_rate, tax_kind, replenish;
+  QString payout, replenishment, capitalisation;
+  double percent, tax;
+  long long int deposit;
+} deposit_t;
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -30,7 +39,7 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  MainWindow(QWidget *parent = nullptr);
+  MainWindow(QWidget* parent = nullptr);
   ~MainWindow();
  private slots:
 
@@ -106,8 +115,30 @@ class MainWindow : public QMainWindow {
 
   void on_count_credit_clicked();
 
+  void on_lineEdit_dep_editingFinished();
+
+  void on_pushButton_2_clicked();
+
+  void on_pushButton_clicked();
+
+  double procent_calc(int, double, int);
+
+  void no_capitalisation(deposit_t* account);
+
+  void capitalisation(deposit_t* dep);
+
+  void tax_calculate(deposit_t* dep);
+
+  void replenish_calc_noCap(deposit_t* dep);
+
+  int combo_box_pars(QString str);
+
+  void on_box_replenishment_currentTextChanged(const QString& arg1);
+
+  void on_count_deposit_clicked();
+
  private:
-  Ui::MainWindow *ui;
+  Ui::MainWindow* ui;
   double xBegin, xEnd, h, X = 0.0;
   int N;
   QVector<double> x, y;

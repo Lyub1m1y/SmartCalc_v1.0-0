@@ -31,7 +31,7 @@ install:
 ifeq ($(OS), Darwin)
 	@cd View && qmake6 && make && make clean && rm Makefile && mv SmartCalc_v1-0-0.app/Contents/MacOS/SmartCalc_v1-0-0 ../
 else
-	@cd View && qmake6 && make && make clean && rm Makefile && mv SmartCalc_v1-0-0. ../
+	@cd View && qmake6 && make && make clean && rm Makefile && mv SmartCalc_v1-0-0 ../
 endif
 
 uninstall:
@@ -55,7 +55,9 @@ clean:
 	@rm -rf ../Archive_SmartCalc_v1.0.*
 	@rm -rf build-SmartCalc_v1-0-0-Desktop-Release/
 	@rm -rf build-SmartCalc_v1-0-0-Desktop_x86_darwin_generic_mach_o_64bit-Debug
-	@rm -rf Model/smartcalc
+	@rm -rf **/moc_predefs.h
+	@rm -rf **/smartcalc
+	@rm -rf **/SmartCalc_v1-0-0
 	@rm -rf View/SmartCalc_v1-0-0.app
 	@rm -rf **/smartcalc.dSYM
 	@rm -rf GcovReport
@@ -93,3 +95,4 @@ check:
 	@cp ../materials/linters/CPPLINT.cfg .
 	python3 ../materials/linters/cpplint.py --extensions=c **/*.c
 	clang-format -style=Google -n **/*.c
+	@rm -rf CPPLINT.cfg

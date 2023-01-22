@@ -8,7 +8,7 @@ valgrind --quiet \
     --trace-children=yes \
     --track-origins=yes \
     --track-fds=no \
-    -- ./test
+    -- ./test.out
 # valgrind -q --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all ./test
 # cat valgrind.log
 make clean

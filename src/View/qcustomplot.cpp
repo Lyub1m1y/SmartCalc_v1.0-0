@@ -6635,7 +6635,7 @@ void QCPAxisTickerDateTime::setTickOrigin(const QDateTime &origin)
 /*! \internal
   
   Returns a sensible tick step with intervals appropriate for a date-time-display, such as weekly,
-  monthly, bi-monthly, etc.
+  Ежемесячно, bi-Ежемесячно, etc.
   
   Note that this tick step isn't used exactly when generating the tick vector in \ref
   createTickVector, but only as a guiding value requiring some correction for each individual tick
@@ -6675,7 +6675,7 @@ double QCPAxisTickerDateTime::getTickStep(const QCPRange &range)
 /*! \internal
   
   Returns a sensible sub tick count with intervals appropriate for a date-time-display, such as weekly,
-  monthly, bi-monthly, etc.
+  Ежемесячно, bi-Ежемесячно, etc.
   
   \seebaseclassmethod
 */
