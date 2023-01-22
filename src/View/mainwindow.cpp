@@ -455,7 +455,6 @@ void MainWindow::on_count_credit_clicked() {
         double interes_rate = ui->edit_interest_rate->text().toDouble();
         QString month_pay;
         if (ui->radioButton_diff->isChecked()) {
-          QString varMonth = QString::number(i);
           payment = sum_credit / term +
                     sum_interest * interes_rate * MONTH / 365 / 100;
           total_pay += payment;
@@ -487,3 +486,9 @@ void MainWindow::on_count_credit_clicked() {
     }
   }
 }
+
+void MainWindow::on_count_deposit_clicked()
+{
+
+}
+
