@@ -65,6 +65,8 @@ int isDot(char* dot);
 int isSign(char* text, int* i, int* dotCount);
 int isOper(char symb);
 void chToTZ(char* text, int length, int need);
+void setCloseBracket(char* text, stack_tt** input, int* flagPow,
+                     int flagOpenBracket);
 int checkCorrectOperator(char* text, int* i);
 int checkRatioBrackets(char* text, int text_length);
 int checkSupport(stack_tt* helpStack, int priority);

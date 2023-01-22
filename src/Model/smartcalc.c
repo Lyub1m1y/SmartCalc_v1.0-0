@@ -1,5 +1,13 @@
 #include "smartcalc.h"
 
+// debug
+// int main() {
+//   double double_result = 0.0;
+//   char text[] = "1^2^3^4^5^6";
+//   int status = entryPoint(text, &double_result, 10);
+//   return 0;
+// }
+
 int entryPoint(char* text, double* double_result, double x_value) {
   int status = OK;
   if (validator(text) == OK) {
@@ -51,6 +59,8 @@ int validator(char* text) {
 
 void parser(char* text, stack_tt** reverseTokens, double x_value) {
   int text_length = strlen(text);
+  int flagPow = 0;
+  int flagOpenBracket = 0;
   for (int i = 0; i < text_length; i++) {
     if (isdigit(text[i]) != 0) {
       char number[255] = {0};
@@ -64,12 +74,24 @@ void parser(char* text, stack_tt** reverseTokens, double x_value) {
       i--;
       sscanf(number, "%lf", &value);
       stack_push_(value, 0, NUMBER, reverseTokens);
+      setCloseBracket(&text[i], reverseTokens, &flagPow, flagOpenBracket);
     } else if (text[i] == 'x') {
       stack_push_(x_value, 0, NUMBER, reverseTokens);
+      setCloseBracket(&text[i], reverseTokens, &flagPow, flagOpenBracket);
     } else if (text[i] == '(') {
       stack_push_(0, 0, OPENBRACKET, reverseTokens);
+      if (flagPow != 0) {
+        flagOpenBracket++;
+      }
     } else if (text[i] == ')') {
       stack_push_(0, 0, CLOSEBRACKET, reverseTokens);
+      if (flagOpenBracket > 0) {
+        flagOpenBracket--;
+      }
+      while (flagPow > 0) {
+        stack_push_(0, 0, CLOSEBRACKET, reverseTokens);
+        flagPow--;
+      }
     } else if (text[i] == '*') {
       stack_push_(0, 2, MUL, reverseTokens);
     } else if (text[i] == '/') {
@@ -79,6 +101,8 @@ void parser(char* text, stack_tt** reverseTokens, double x_value) {
       i += 2;
     } else if (text[i] == '^') {
       stack_push_(0, 3, POW, reverseTokens);
+      stack_push_(0, 0, OPENBRACKET, reverseTokens);
+      flagPow++;
     } else if (text[i] == 's') {
       if (text[i + 1] == 'i') {
         stack_push_(0, 4, SIN, reverseTokens);
@@ -284,6 +308,16 @@ int isNumber(char* str) {
     }
   }
   return status;
+}
+
+void setCloseBracket(char* text, stack_tt** input, int* flagPow,
+                     int flagOpenBracket) {
+  if (*(text + 1) != '^' && flagPow != 0 && flagOpenBracket == 0) {
+    while (*flagPow > 0) {
+      stack_push_(0, 0, CLOSEBRACKET, input);
+      *flagPow = *flagPow - 1;
+    }
+  }
 }
 
 void chToTZ(char* text, int length, int need) {

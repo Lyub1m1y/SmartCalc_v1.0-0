@@ -57,6 +57,7 @@ clean:
 	@rm -rf build-SmartCalc_v1-0-0-Desktop_x86_darwin_generic_mach_o_64bit-Debug
 	@rm -rf Model/smartcalc
 	@rm -rf View/SmartCalc_v1-0-0.app
+	@rm -rf **/smartcalc.dSYM
 	@rm -rf GcovReport
 
 dvi:
