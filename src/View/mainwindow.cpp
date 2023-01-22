@@ -637,15 +637,12 @@ void MainWindow::on_count_deposit_clicked() {
   char *text_6 = ba_6.data();
 
   int status_valid = FAIL;
-  if (((*text_1) != '\0') && ((*text_2) != '\0') && ((*text_3) != '\0') &&
-      ((*text_4) != '\0') && ((*text_5) != '\0') && ((*text_6) != '\0')) {
-    if ((isNumber(text_1) == OK) && (isNumber(text_2) == OK) &&
-        (isNumber(text_3) == OK) && (isNumber(text_4) == OK) &&
-        (isNumber(text_5) == OK) && (isNumber(text_6) == OK)) {
-      status_valid = OK;
-    } else {
-      QMessageBox::critical(this, "Invalid expression", "Invalid input");
-    }
+  if ((isNumber(text_1) == OK) && (isNumber(text_2) == OK) &&
+      (isNumber(text_3) == OK) && (isNumber(text_4) == OK) &&
+      (isNumber(text_5) == OK) && (isNumber(text_6) == OK)) {
+    status_valid = OK;
+  } else {
+    QMessageBox::critical(this, "Invalid expression", "Invalid input");
   }
 
   if (status_valid == OK) {
